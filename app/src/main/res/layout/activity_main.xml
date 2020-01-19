@@ -10,6 +10,16 @@
         android:orientation="vertical"
         tools:context=".ui.main.MainActivity">
 
+
+    <TextView
+            android:id="@+id/main_tv_compare_two_devices"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24dp"
+            android:textAlignment="center"
+            android:paddingBottom="36dp"
+            android:text="@string/main_compare_two_devices" />
+
     <Button
             android:id="@+id/main_btn_choosedevice"
             style="@style/ButtonStyle"

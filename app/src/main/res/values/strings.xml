@@ -4,4 +4,5 @@
     <string name="label_versus">VS</string>
     <string name="button_choose_first_device">Choose first device</string>
     <string name="button_choose_second_device">Choose second device</string>
+    <string name="main_compare_two_devices">Compare two devices</string>
 </resources>
