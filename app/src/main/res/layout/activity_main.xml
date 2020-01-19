@@ -12,8 +12,10 @@
 
     <Button
             android:id="@+id/main_btn_choosedevice"
-            android:layout_width="wrap_content"
+            style="@style/ButtonStyle"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/bg_btn_green"
             android:text="@string/button_choose_first_device" />
 
 
@@ -21,18 +23,17 @@
             android:id="@+id/main_cv_first_device"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardUseCompatPadding="true"
-            app:cardElevation="2dp"
             android:visibility="gone"
-            tools:visibility="visible"
-            >
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true"
+            tools:visibility="visible">
 
         <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:gravity="center"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:padding="10dp">
 
             <ImageView
                     android:layout_width="45dp"
@@ -48,11 +49,9 @@
 
             <Button
                     android:id="@+id/main_btn_close_first_device"
-                    style="?android:attr/borderlessButtonStyle"
+                    style="@style/CrossButtonStyle"
                     android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:background="@drawable/baseline_close_black_18"
-                    app:backgroundTint="@android:color/darker_gray" />
+                    android:layout_height="25dp" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
@@ -64,29 +63,33 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="15dp"
-            android:text="@string/label_versus" />
+            android:text="@string/label_versus"
+            android:textSize="18dp" />
 
     <Button
             android:id="@+id/main_btn_chooseseconddevice"
-            android:layout_width="wrap_content"
+            style="@style/ButtonStyle"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="@string/button_choose_second_device" />
+            android:background="@drawable/bg_btn_green"
+            android:text="@string/button_choose_second_device"
+            android:textColor="#FFF" />
 
 
     <androidx.cardview.widget.CardView
             android:id="@+id/main_cv_second_device"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardUseCompatPadding="true"
             android:visibility="gone"
+            app:cardUseCompatPadding="true"
             tools:visibility="visible">
 
         <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="10dp">
 
             <ImageView
                     android:layout_width="45dp"
@@ -100,15 +103,11 @@
                     android:padding="10dp"
                     android:textAlignment="center" />
 
-            <!-- TODO change it -->
             <Button
                     android:id="@+id/main_btn_close_second_device"
-                    style="?android:attr/borderlessButtonStyle"
+                    style="@style/CrossButtonStyle"
                     android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:background="@drawable/baseline_close_black_18"
-                    android:backgroundTint="@android:color/darker_gray" />
-
+                    android:layout_height="25dp" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
@@ -116,11 +115,14 @@
 
     <Button
             android:id="@+id/main_btn_compare"
-            android:layout_width="wrap_content"
+            style="@style/ButtonStyle"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
+            android:background="@drawable/bg_btn_green"
             android:text="Compare devices"
+            android:textColor="#FFF"
             android:visibility="gone"
             tools:visibility="visible" />
 </LinearLayout>

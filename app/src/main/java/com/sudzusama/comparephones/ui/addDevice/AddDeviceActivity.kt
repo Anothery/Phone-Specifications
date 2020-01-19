@@ -38,15 +38,15 @@ class AddDeviceActivity : AppCompatActivity(), AddDevice.View {
     }
 
     private fun setupRecyclerView() {
-        recyclerView = findViewById(R.id.rv_matches)
+        recyclerView = findViewById(R.id.adddevice_rv)
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = AddDeviceMatchesAdapter(matches) { presenter.onDeviceItemClicked(it) }
         recyclerView.adapter = adapter
     }
 
     private fun setupViews() {
-        etInsertDevice = findViewById(R.id.etInsertDevice)
-        tvMatchesCount = findViewById(R.id.tvMatchesCount)
+        etInsertDevice = findViewById(R.id.adddevice_et_insert)
+        tvMatchesCount = findViewById(R.id.adddevice_tv_matchescount)
     }
 
 
