@@ -1,7 +1,7 @@
 package com.sudzusama.comparephones.ui.addDevice
 
 import android.util.Log
-import com.sudzusama.comparephones.data.model.DeviceInfo
+import com.sudzusama.comparephones.data.model.Device
 import com.sudzusama.comparephones.data.repository.DeviceRepository
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,9 +17,9 @@ class AddDevicePresenter @Inject constructor(
 ) : AddDevice.Presenter {
 
     private val disposable = CompositeDisposable()
-    private lateinit var matches: ArrayList<DeviceInfo>
+    private lateinit var matches: ArrayList<Device>
 
-    override fun onCreate(matches: ArrayList<DeviceInfo>) {
+    override fun onCreate(matches: ArrayList<Device>) {
         this.matches = matches
     }
 
@@ -46,7 +46,7 @@ class AddDevicePresenter @Inject constructor(
         }
     }
 
-    private fun onDeviceListArrived(deviceList: List<DeviceInfo>) {
+    private fun onDeviceListArrived(deviceList: List<Device>) {
         if (deviceList.isNotEmpty()) {
             matches.clear()
             matches.addAll(deviceList)
@@ -57,7 +57,7 @@ class AddDevicePresenter @Inject constructor(
         }
     }
 
-    private fun onDeviceListError(ex : Throwable) {
+    private fun onDeviceListError(ex: Throwable) {
         Log.e(AddDevicePresenter::class.java.name, ex.message)
         matches.clear()
         view.setMatchesCount(0)
@@ -69,7 +69,7 @@ class AddDevicePresenter @Inject constructor(
         view.updateRecyclerView()
     }
 
-    override fun onDeviceItemClicked(device: DeviceInfo) {
+    override fun onDeviceItemClicked(device: Device) {
         view.disableMatchesCount()
         matches.clear()
         view.finishActivity(device)

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.sudzusama.comparephones.DEVICE_EXTRA
 import com.sudzusama.comparephones.R
-import com.sudzusama.comparephones.data.model.DeviceInfo
+import com.sudzusama.comparephones.data.model.Device
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
@@ -24,7 +24,7 @@ class AddDeviceActivity : AppCompatActivity(), AddDevice.View {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: AddDeviceMatchesAdapter
-    private var matches: ArrayList<DeviceInfo> = ArrayList()
+    private var matches = ArrayList<Device>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -40,9 +40,7 @@ class AddDeviceActivity : AppCompatActivity(), AddDevice.View {
     private fun setupRecyclerView() {
         recyclerView = findViewById(R.id.rv_matches)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = AddDeviceMatchesAdapter(matches, this) {
-            presenter.onDeviceItemClicked(it)
-        }
+        adapter = AddDeviceMatchesAdapter(matches) { presenter.onDeviceItemClicked(it) }
         recyclerView.adapter = adapter
     }
 
@@ -68,7 +66,7 @@ class AddDeviceActivity : AppCompatActivity(), AddDevice.View {
         adapter.notifyDataSetChanged()
     }
 
-    override fun finishActivity(result: DeviceInfo) {
+    override fun finishActivity(result: Device) {
         val intent = Intent()
         intent.putExtra(DEVICE_EXTRA, result)
         setResult(1, intent)

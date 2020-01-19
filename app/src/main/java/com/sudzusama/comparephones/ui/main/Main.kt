@@ -1,7 +1,7 @@
 package com.sudzusama.comparephones.ui.main
 
 import android.content.Intent
-import com.sudzusama.comparephones.data.model.DeviceInfo
+import com.sudzusama.comparephones.data.model.Device
 
 interface Main {
     interface View {
@@ -17,7 +17,7 @@ interface Main {
         fun disableFirstDeviceView()
         fun enableCompareButton()
         fun disableCompareButton()
-        fun startComparingActivity(firstDevice: DeviceInfo, secondDevice: DeviceInfo)
+        fun startComparingActivity(firstDevice: Device, secondDevice: Device)
         fun startAddDeviceActivity(requestCode: Int)
         fun enableButtons()
         fun disableButtons()

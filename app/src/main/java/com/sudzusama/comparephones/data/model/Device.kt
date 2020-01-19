@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class DeviceInfo(
+data class Device(
     val Brand: String?,
     val DeviceName: String,
     val _2g_bands: String?,

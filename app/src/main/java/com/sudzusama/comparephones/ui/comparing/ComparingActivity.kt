@@ -9,17 +9,21 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.sudzusama.comparephones.DEVICE_EXTRA
 import com.sudzusama.comparephones.R
-import com.sudzusama.comparephones.data.model.DeviceInfo
-import com.sudzusama.comparephones.ui.device.DeviceFragment
+import com.sudzusama.comparephones.data.model.Device
+import com.sudzusama.comparephones.ui.deviceinfo.DeviceInfoFragment
 import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
-class ComparingActivity : AppCompatActivity(), Comparing.View {
+class ComparingActivity : AppCompatActivity(), Comparing.View, HasSupportFragmentInjector {
+    @Inject
+    lateinit var presenter: Comparing.Presenter
+    @Inject lateinit var dispatchingAndroidInjector : DispatchingAndroidInjector<Fragment>
 
-    @Inject lateinit var presenter: Comparing.Presenter
-
-    private lateinit var vpDevices : ViewPager
-    private lateinit var tlDevices : TabLayout
+    private lateinit var vpDevices: ViewPager
+    private lateinit var tlDevices: TabLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -29,32 +33,32 @@ class ComparingActivity : AppCompatActivity(), Comparing.View {
         presenter.onCreate(intent)
     }
 
-    private fun setupViews(){
+    private fun setupViews() {
         vpDevices = findViewById(R.id.vpDevices)
         tlDevices = findViewById(R.id.tlDevices)
     }
 
 
     override fun setupViewPager(
-        firstDevice: DeviceInfo,
-        secondDevice: DeviceInfo,
+        firstDevice: Device,
+        secondDevice: Device,
         firstDeviceName: String,
         secondDeviceName: String
     ) {
         val adapter = ViewPagerAdapter(supportFragmentManager)
 
-        val firstFragment = DeviceFragment()
+        val firstFragment = DeviceInfoFragment()
         val firstDeviceBundle = Bundle()
         firstDeviceBundle.putParcelable(DEVICE_EXTRA, firstDevice)
         firstFragment.arguments = firstDeviceBundle
 
-        val secondFragment = DeviceFragment()
+        val secondFragment = DeviceInfoFragment()
         val secondDeviceBundle = Bundle()
         secondDeviceBundle.putParcelable(DEVICE_EXTRA, secondDevice)
         secondFragment.arguments = secondDeviceBundle
 
-        adapter.addFragment(firstFragment,firstDeviceName)
-        adapter.addFragment(secondFragment,secondDeviceName)
+        adapter.addFragment(firstFragment, firstDeviceName)
+        adapter.addFragment(secondFragment, secondDeviceName)
 
         vpDevices.adapter = adapter
         tlDevices.setupWithViewPager(vpDevices)
@@ -85,4 +89,7 @@ class ComparingActivity : AppCompatActivity(), Comparing.View {
 
     }
 
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+        return dispatchingAndroidInjector
+    }
 }

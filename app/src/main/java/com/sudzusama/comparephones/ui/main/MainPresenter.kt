@@ -2,16 +2,16 @@ package com.sudzusama.comparephones.ui.main
 
 import android.content.Intent
 import com.sudzusama.comparephones.DEVICE_EXTRA
-import com.sudzusama.comparephones.data.model.DeviceInfo
+import com.sudzusama.comparephones.data.model.Device
 import javax.inject.Inject
 
 class MainPresenter @Inject constructor(val view: Main.View) : Main.Presenter {
 
-    private var firstDevice: DeviceInfo? = null
-    private var secondDevice: DeviceInfo? = null
+    private var firstDevice: Device? = null
+    private var secondDevice: Device? = null
 
     override fun onViewResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val device = data?.getParcelableExtra<DeviceInfo>(DEVICE_EXTRA)
+        val device = data?.getParcelableExtra<Device>(DEVICE_EXTRA)
         device?.let {
             when (requestCode) {
                 1 -> {

@@ -10,7 +10,7 @@ import androidx.cardview.widget.CardView
 import com.sudzusama.comparephones.FIRST_DEVICE_EXTRA
 import com.sudzusama.comparephones.R
 import com.sudzusama.comparephones.SECOND_DEVICE_EXTRA
-import com.sudzusama.comparephones.data.model.DeviceInfo
+import com.sudzusama.comparephones.data.model.Device
 import com.sudzusama.comparephones.ui.comparing.ComparingActivity
 import com.sudzusama.comparephones.ui.addDevice.AddDeviceActivity
 import dagger.android.AndroidInjection
@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity(), Main.View {
         enableButtons()
     }
 
-    override fun startComparingActivity(firstDevice: DeviceInfo, secondDevice: DeviceInfo) {
+    override fun startComparingActivity(firstDevice: Device, secondDevice: Device) {
         val intent = Intent(this@MainActivity, ComparingActivity::class.java)
         intent.putExtra(FIRST_DEVICE_EXTRA, firstDevice)
         intent.putExtra(SECOND_DEVICE_EXTRA, secondDevice)

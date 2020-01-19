@@ -1,18 +1,17 @@
 package com.sudzusama.comparephones.ui.addDevice
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sudzusama.comparephones.R
-import com.sudzusama.comparephones.data.model.DeviceInfo
+import com.sudzusama.comparephones.data.model.Device
 
 
 class AddDeviceMatchesAdapter(
-    private val items: ArrayList<DeviceInfo>, private val context: Context,
-    val listener: (DeviceInfo) -> Unit
+    private val items: ArrayList<Device>,
+    val listener: (Device) -> Unit
 ) :
     RecyclerView.Adapter<AddDeviceMatchesAdapter.ViewHolder>() {
 
@@ -21,8 +20,9 @@ class AddDeviceMatchesAdapter(
         holder.itemView.setOnClickListener { listener(items[position]) }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddDeviceMatchesAdapter.ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.device_list_layout, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.device_list_layout, parent, false)
         return ViewHolder(view)
     }
 
