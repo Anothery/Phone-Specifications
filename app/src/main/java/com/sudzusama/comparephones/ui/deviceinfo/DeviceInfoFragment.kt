@@ -11,8 +11,6 @@ import com.sudzusama.comparephones.DEVICE_EXTRA
 import com.sudzusama.comparephones.R
 import com.sudzusama.comparephones.data.model.Device
 import com.sudzusama.comparephones.data.model.Specification
-import com.sudzusama.comparephones.ui.deviceinfo.DeviceInfoListAdapter
-import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 

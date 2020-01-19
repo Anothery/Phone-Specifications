@@ -48,22 +48,28 @@ class MainPresenter @Inject constructor(val view: Main.View) : Main.Presenter {
         view.enableSecondDeviceButton()
     }
 
-    override fun onChooseFirstDeviceButtonClicked(){
+    override fun onChooseFirstDeviceButtonClicked() {
+        view.disableButtons()
         view.startAddDeviceActivity(1)
     }
 
-    override fun onChooseSecondDeviceButtonClicked(){
+    override fun onChooseSecondDeviceButtonClicked() {
+        view.disableButtons()
         view.startAddDeviceActivity(2)
     }
 
-    override fun onCompareButtonPressed(){
+    override fun onCompareButtonPressed() {
         val fDevice = firstDevice
         val sDevice = secondDevice
         if (fDevice != null && sDevice != null) {
+            view.disableButtons()
             view.startComparingActivity(fDevice, sDevice)
+        } else {
+            //TODO onCompareButtonPressed error toast
         }
-        else {
-            //TODO onCompareButtonPressed
-        }
+    }
+
+    override fun onResume() {
+        view.enableButtons()
     }
 }

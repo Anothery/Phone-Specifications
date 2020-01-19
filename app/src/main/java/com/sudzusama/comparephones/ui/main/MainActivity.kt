@@ -36,41 +36,26 @@ class MainActivity : AppCompatActivity(), Main.View {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         initViews()
 
-        btnChooseFirstDevice.setOnClickListener {
-            disableButtons()
-            presenter.onChooseFirstDeviceButtonClicked()
-        }
-
-        btnChooseSecondDevice.setOnClickListener {
-            disableButtons()
-            presenter.onChooseSecondDeviceButtonClicked()
-        }
-
-        btnCloseFirstDeviceView.setOnClickListener {
-            presenter.onCloseFirstDeviceView()
-        }
-        btnCloseSecondDeviceView.setOnClickListener {
-            presenter.onCloseSecondDeviceView()
-        }
-
-        btnCompare.setOnClickListener {
-            disableButtons()
-            presenter.onCompareButtonPressed()
-        }
+        btnChooseFirstDevice.setOnClickListener { presenter.onChooseFirstDeviceButtonClicked() }
+        btnChooseSecondDevice.setOnClickListener { presenter.onChooseSecondDeviceButtonClicked() }
+        btnCloseFirstDeviceView.setOnClickListener { presenter.onCloseFirstDeviceView() }
+        btnCloseSecondDeviceView.setOnClickListener { presenter.onCloseSecondDeviceView() }
+        btnCompare.setOnClickListener { presenter.onCompareButtonPressed() }
     }
 
     private fun initViews() {
-        btnChooseFirstDevice = findViewById(R.id.btnChooseDevice)
-        btnChooseSecondDevice = findViewById(R.id.btnChooseSecondDevice)
-        tvFirstDevice = findViewById(R.id.tvFirstDevice)
-        tvSecondDevice = findViewById(R.id.tvSecondDevice)
-        cvFirstDevice = findViewById(R.id.activity_main_cv_first_device)
-        cvSecondDevice = findViewById(R.id.activity_main_cv_second_device)
-        btnCompare = findViewById(R.id.btnCompare)
-        btnCloseFirstDeviceView = findViewById(R.id.activity_main_btn_close_first_device)
-        btnCloseSecondDeviceView = findViewById(R.id.activity_main_btn_close_second_device)
+        btnChooseFirstDevice = findViewById(R.id.main_btn_choosedevice)
+        btnChooseSecondDevice = findViewById(R.id.main_btn_chooseseconddevice)
+        tvFirstDevice = findViewById(R.id.main_tv_firstdevice)
+        tvSecondDevice = findViewById(R.id.main_tv_seconddevice)
+        cvFirstDevice = findViewById(R.id.main_cv_first_device)
+        cvSecondDevice = findViewById(R.id.main_cv_second_device)
+        btnCompare = findViewById(R.id.main_btn_compare)
+        btnCloseFirstDeviceView = findViewById(R.id.main_btn_close_first_device)
+        btnCloseSecondDeviceView = findViewById(R.id.main_btn_close_second_device)
 
     }
 
@@ -80,12 +65,12 @@ class MainActivity : AppCompatActivity(), Main.View {
     }
 
     override fun loadFirstDeviceInfo(deviceName: String) {
-        //TODO 1
+        //TODO Image
         tvFirstDevice.text = deviceName
     }
 
     override fun loadSecondDeviceInfo(deviceName: String) {
-        //TODO 1
+        //TODO Image
         tvSecondDevice.text = deviceName
     }
 
@@ -104,7 +89,7 @@ class MainActivity : AppCompatActivity(), Main.View {
 
     override fun onResume() {
         super.onResume()
-        enableButtons()
+        presenter.onResume()
     }
 
     override fun startComparingActivity(firstDevice: Device, secondDevice: Device) {

@@ -31,8 +31,8 @@ class DeviceInfoListAdapter(private val specifications: ArrayList<Specification>
         var tvSpecDescription: TextView
 
         init {
-            tvSpecTitle = itemView.findViewById(R.id.tvSpecTitle)
-            tvSpecDescription = itemView.findViewById(R.id.tvSpecDescription)
+            tvSpecTitle = itemView.findViewById(R.id.deviceinfolist_tv_spectitle)
+            tvSpecDescription = itemView.findViewById(R.id.deviceinfolist_tv_specdescription)
         }
     }
 }

@@ -34,7 +34,7 @@ class AddDeviceMatchesAdapter(
         var tvDeviceName: TextView? = null
 
         init {
-            tvDeviceName = itemView.findViewById(R.id.tvDeviceName)
+            tvDeviceName = itemView.findViewById(R.id.devicelist_tv_devicename)
         }
 
     }

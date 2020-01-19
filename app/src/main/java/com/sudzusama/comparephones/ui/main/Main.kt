@@ -9,8 +9,8 @@ interface Main {
         fun enableFirstDeviceButton()
         fun disableSecondDeviceButton()
         fun enableSecondDeviceButton()
-        fun loadFirstDeviceInfo(deviceName : String)
-        fun loadSecondDeviceInfo(deviceName : String)
+        fun loadFirstDeviceInfo(deviceName: String)
+        fun loadSecondDeviceInfo(deviceName: String)
         fun enableSecondDeviceView()
         fun disableSecondDeviceView()
         fun enableFirstDeviceView()
@@ -30,5 +30,6 @@ interface Main {
         fun onCompareButtonPressed()
         fun onChooseFirstDeviceButtonClicked()
         fun onChooseSecondDeviceButtonClicked()
+        fun onResume()
     }
 }

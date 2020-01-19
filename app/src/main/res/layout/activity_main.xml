@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!-- TODO change id's etc -->
+<?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,14 +11,14 @@
         tools:context=".ui.main.MainActivity">
 
     <Button
-            android:id="@+id/btnChooseDevice"
+            android:id="@+id/main_btn_choosedevice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_choose_first_device" />
 
 
     <androidx.cardview.widget.CardView
-            android:id="@+id/activity_main_cv_first_device"
+            android:id="@+id/main_cv_first_device"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardUseCompatPadding="true"
@@ -40,14 +40,14 @@
                     android:src="@mipmap/ic_launcher_round" />
 
             <TextView
-                    android:id="@+id/tvFirstDevice"
+                    android:id="@+id/main_tv_firstdevice"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:textAlignment="center" />
 
             <Button
-                    android:id="@+id/activity_main_btn_close_first_device"
+                    android:id="@+id/main_btn_close_first_device"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
@@ -59,7 +59,7 @@
 
 
     <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/main_tv_versus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -67,14 +67,14 @@
             android:text="@string/label_versus" />
 
     <Button
-            android:id="@+id/btnChooseSecondDevice"
+            android:id="@+id/main_btn_chooseseconddevice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_choose_second_device" />
 
 
     <androidx.cardview.widget.CardView
-            android:id="@+id/activity_main_cv_second_device"
+            android:id="@+id/main_cv_second_device"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardUseCompatPadding="true"
@@ -94,7 +94,7 @@
                     android:src="@mipmap/ic_launcher_round" />
 
             <TextView
-                    android:id="@+id/tvSecondDevice"
+                    android:id="@+id/main_tv_seconddevice"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -102,7 +102,7 @@
 
             <!-- TODO change it -->
             <Button
-                    android:id="@+id/activity_main_btn_close_second_device"
+                    android:id="@+id/main_btn_close_second_device"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
@@ -115,7 +115,7 @@
 
 
     <Button
-            android:id="@+id/btnCompare"
+            android:id="@+id/main_btn_compare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
