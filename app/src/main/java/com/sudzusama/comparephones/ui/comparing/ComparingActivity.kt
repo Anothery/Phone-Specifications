@@ -1,7 +1,9 @@
 package com.sudzusama.comparephones.ui.comparing
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -24,18 +26,37 @@ class ComparingActivity : AppCompatActivity(), Comparing.View, HasSupportFragmen
 
     private lateinit var vpDevices: ViewPager
     private lateinit var tlDevices: TabLayout
+    private lateinit var toolbar : Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comparing)
+        setupToolbar()
         setupViews()
         presenter.onCreate(intent)
     }
 
+    private fun setupToolbar() {
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        if (supportActionBar != null){
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.setDisplayShowHomeEnabled(true)
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item?.itemId == android.R.id.home){
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun setupViews() {
-        vpDevices = findViewById(R.id.vpDevices)
-        tlDevices = findViewById(R.id.tlDevices)
+        vpDevices = findViewById(R.id.comparing_vp_devices)
+        tlDevices = findViewById(R.id.comparing_tl_devices)
     }
 
 
