@@ -75,7 +75,7 @@ class AddDevicePresenter @Inject constructor(
         view.finishActivity(device)
     }
 
-    override fun onStop() {
+    override fun onDestroy() {
         disposable.clear()
     }
 

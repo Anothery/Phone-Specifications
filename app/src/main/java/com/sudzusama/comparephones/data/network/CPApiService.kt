@@ -10,4 +10,5 @@ interface CPApiService {
     fun getDevices(
         @Query("device") deviceName: String
     ): Single<List<Device>>
+
 }

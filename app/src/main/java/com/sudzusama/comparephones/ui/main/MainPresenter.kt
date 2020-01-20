@@ -72,4 +72,5 @@ class MainPresenter @Inject constructor(val view: Main.View) : Main.Presenter {
     override fun onResume() {
         view.enableButtons()
     }
+
 }

@@ -17,6 +17,6 @@ interface AddDevice {
         fun onCreate(matches : ArrayList<Device>)
         fun observeFromText(observable: Observable<CharSequence>)
         fun onDeviceItemClicked(device : Device)
-        fun onStop()
+        fun onDestroy()
     }
 }
