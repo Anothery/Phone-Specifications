@@ -1,6 +1,6 @@
 package com.sudzusama.comparephones.data.network
 
-import com.sudzusama.comparephones.data.model.Device
+import com.sudzusama.comparephones.domain.entities.Device
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

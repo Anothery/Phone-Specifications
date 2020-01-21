@@ -1,6 +1,6 @@
 package com.sudzusama.comparephones.ui.addDevice
 
-import com.sudzusama.comparephones.data.model.Device
+import com.sudzusama.comparephones.domain.entities.Device
 import io.reactivex.Observable
 import java.util.*
 

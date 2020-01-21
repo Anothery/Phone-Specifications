@@ -1,7 +1,7 @@
 package com.sudzusama.comparephones.ui.deviceinfo
 
-import com.sudzusama.comparephones.data.model.Device
-import com.sudzusama.comparephones.data.model.Specification
+import com.sudzusama.comparephones.domain.entities.Device
+import com.sudzusama.comparephones.domain.entities.Specification
 
 interface DeviceInfo {
     interface View {

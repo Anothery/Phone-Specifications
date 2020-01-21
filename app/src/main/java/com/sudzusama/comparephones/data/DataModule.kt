@@ -2,7 +2,7 @@ package com.sudzusama.comparephones.data
 
 import com.sudzusama.comparephones.data.network.NetworkModule
 import com.sudzusama.comparephones.data.repository.DeviceRemoteRepository
-import com.sudzusama.comparephones.data.repository.DeviceRepository
+import com.sudzusama.comparephones.domain.repositories.DeviceRepository
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton

@@ -1,7 +1,7 @@
 package com.sudzusama.comparephones.ui.comparing
 
 import android.content.Intent
-import com.sudzusama.comparephones.data.model.Device
+import com.sudzusama.comparephones.domain.entities.Device
 
 interface Comparing {
     interface View {

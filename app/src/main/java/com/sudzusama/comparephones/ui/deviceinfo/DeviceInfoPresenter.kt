@@ -1,7 +1,7 @@
 package com.sudzusama.comparephones.ui.deviceinfo
 
-import com.sudzusama.comparephones.data.model.Device
-import com.sudzusama.comparephones.data.model.Specification
+import com.sudzusama.comparephones.domain.entities.Device
+import com.sudzusama.comparephones.domain.entities.Specification
 import javax.inject.Inject
 import kotlin.reflect.full.memberProperties
 
@@ -22,7 +22,12 @@ class DeviceInfoPresenter @Inject constructor(
             val name = prop.name
             val value = prop.get(device)
             if (value != null) {
-                specifications.add(Specification(name, value.toString()))
+                specifications.add(
+                    Specification(
+                        name,
+                        value.toString()
+                    )
+                )
             }
         }
     }

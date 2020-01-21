@@ -1,8 +1,8 @@
 package com.sudzusama.comparephones.ui.addDevice
 
 import android.util.Log
-import com.sudzusama.comparephones.data.model.Device
-import com.sudzusama.comparephones.data.repository.DeviceRepository
+import com.sudzusama.comparephones.domain.entities.Device
+import com.sudzusama.comparephones.domain.repositories.DeviceRepository
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

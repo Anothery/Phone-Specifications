@@ -1,6 +1,6 @@
-package com.sudzusama.comparephones.data.repository
+package com.sudzusama.comparephones.domain.repositories
 
-import com.sudzusama.comparephones.data.model.Device
+import com.sudzusama.comparephones.domain.entities.Device
 import io.reactivex.Single
 
 interface DeviceRepository {

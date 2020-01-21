@@ -2,7 +2,7 @@ package com.sudzusama.comparephones.ui.main
 
 import android.content.Intent
 import com.sudzusama.comparephones.DEVICE_EXTRA
-import com.sudzusama.comparephones.data.model.Device
+import com.sudzusama.comparephones.domain.entities.Device
 import javax.inject.Inject
 
 class MainPresenter @Inject constructor(val view: Main.View) : Main.Presenter {

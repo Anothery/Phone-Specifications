@@ -10,7 +10,7 @@ import androidx.cardview.widget.CardView
 import com.sudzusama.comparephones.FIRST_DEVICE_EXTRA
 import com.sudzusama.comparephones.R
 import com.sudzusama.comparephones.SECOND_DEVICE_EXTRA
-import com.sudzusama.comparephones.data.model.Device
+import com.sudzusama.comparephones.domain.entities.Device
 import com.sudzusama.comparephones.ui.comparing.ComparingActivity
 import com.sudzusama.comparephones.ui.addDevice.AddDeviceActivity
 import dagger.android.AndroidInjection
