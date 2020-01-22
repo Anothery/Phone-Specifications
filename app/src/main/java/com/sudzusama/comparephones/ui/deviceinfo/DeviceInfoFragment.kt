@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sudzusama.comparephones.DEVICE_EXTRA
+import com.sudzusama.comparephones.utils.DEVICE_EXTRA
 import com.sudzusama.comparephones.R
 import com.sudzusama.comparephones.domain.entities.Device
 import com.sudzusama.comparephones.domain.entities.Specification

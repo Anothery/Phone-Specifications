@@ -1,11 +1,15 @@
 package com.sudzusama.comparephones.domain.entities
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
+@Entity(tableName = "device")
 @Parcelize
 data class Device(
     val Brand: String?,
+    @PrimaryKey
     val DeviceName: String,
     val _2g_bands: String?,
     val _3_5mm_jack_: String?,

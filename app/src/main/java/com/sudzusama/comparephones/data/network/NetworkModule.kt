@@ -1,7 +1,7 @@
 package com.sudzusama.comparephones.data.network
 
 import com.sudzusama.comparephones.BuildConfig
-import com.sudzusama.comparephones.FONO_API_URL
+import com.sudzusama.comparephones.utils.FONO_API_URL
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor

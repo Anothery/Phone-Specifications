@@ -7,9 +7,9 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import com.sudzusama.comparephones.FIRST_DEVICE_EXTRA
+import com.sudzusama.comparephones.utils.FIRST_DEVICE_EXTRA
 import com.sudzusama.comparephones.R
-import com.sudzusama.comparephones.SECOND_DEVICE_EXTRA
+import com.sudzusama.comparephones.utils.SECOND_DEVICE_EXTRA
 import com.sudzusama.comparephones.domain.entities.Device
 import com.sudzusama.comparephones.ui.comparing.ComparingActivity
 import com.sudzusama.comparephones.ui.addDevice.AddDeviceActivity

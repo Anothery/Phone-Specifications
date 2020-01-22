@@ -2,7 +2,7 @@ package com.sudzusama.comparephones.ui.addDevice
 
 import android.util.Log
 import com.sudzusama.comparephones.domain.entities.Device
-import com.sudzusama.comparephones.domain.repositories.DeviceRepository
+import com.sudzusama.comparephones.domain.repositories.DeviceRepo
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 class AddDevicePresenter @Inject constructor(
     val view: AddDevice.View,
-    private val deviceRepository: DeviceRepository
+    private val deviceRepository: DeviceRepo
 ) : AddDevice.Presenter {
 
     private val disposable = CompositeDisposable()
