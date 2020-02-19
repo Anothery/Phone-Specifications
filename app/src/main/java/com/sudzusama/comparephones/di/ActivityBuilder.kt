@@ -1,26 +1,28 @@
 package com.sudzusama.comparephones.di
 
-import com.sudzusama.comparephones.ui.addDevice.AddDeviceActivity
-import com.sudzusama.comparephones.ui.addDevice.AddDeviceModule
+import com.sudzusama.comparephones.ui.adddevice.AddDeviceActivity
+import com.sudzusama.comparephones.ui.adddevice.AddDeviceModule
 import com.sudzusama.comparephones.ui.comparing.ComparingActivity
 import com.sudzusama.comparephones.ui.comparing.ComparingFragmentModule
 import com.sudzusama.comparephones.ui.comparing.ComparingModule
-import com.sudzusama.comparephones.ui.main.MainActivity
-import com.sudzusama.comparephones.ui.main.MainModule
+import com.sudzusama.comparephones.ui.start.StartActivity
+import com.sudzusama.comparephones.ui.start.StartFragmentModule
+import com.sudzusama.comparephones.ui.start.StartModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class ActivityBuilder {
-    @ActivityScope
-    @ContributesAndroidInjector(modules = [MainModule::class])
-    abstract fun bindMainActivity(): MainActivity
 
-    @ActivityScope
+    @PerActivity
     @ContributesAndroidInjector(modules = [AddDeviceModule::class])
     abstract fun bindAddDeviceActivity(): AddDeviceActivity
 
-    @ActivityScope
+    @PerActivity
     @ContributesAndroidInjector(modules = [ComparingModule::class, ComparingFragmentModule::class])
     abstract fun bindComparingActivity(): ComparingActivity
+
+    @PerActivity
+    @ContributesAndroidInjector(modules = [StartModule::class, StartFragmentModule::class])
+    abstract fun bindStartActivity(): StartActivity
 }

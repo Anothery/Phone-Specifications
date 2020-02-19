@@ -3,7 +3,7 @@ package com.sudzusama.comparephones.di
 import android.app.Application
 import com.sudzusama.comparephones.CPApp
 import com.sudzusama.comparephones.data.DataModule
-import com.sudzusama.comparephones.data.network.NetworkModule
+import com.sudzusama.comparephones.data.source.network.NetworkModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule

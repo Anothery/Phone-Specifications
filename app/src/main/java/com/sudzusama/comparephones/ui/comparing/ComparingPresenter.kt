@@ -6,7 +6,7 @@ import com.sudzusama.comparephones.utils.SECOND_DEVICE_EXTRA
 import com.sudzusama.comparephones.domain.entities.Device
 import javax.inject.Inject
 
-class ComparingPresenter @Inject constructor(val view: Comparing.View) : Comparing.Presenter {
+class ComparingPresenter @Inject constructor(val view: ComparingContract.View) : ComparingContract.Presenter {
 
 
     override fun onCreate(viewIntent: Intent) {

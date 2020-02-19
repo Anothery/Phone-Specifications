@@ -6,8 +6,8 @@ import javax.inject.Inject
 import kotlin.reflect.full.memberProperties
 
 class DeviceInfoPresenter @Inject constructor(
-    val view: DeviceInfo.View
-) : DeviceInfo.Presenter {
+    val view: DeviceInfoContract.View
+) : DeviceInfoContract.Presenter {
 
     private lateinit var specifications: ArrayList<Specification>
 

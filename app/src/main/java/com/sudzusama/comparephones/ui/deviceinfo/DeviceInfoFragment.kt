@@ -14,9 +14,9 @@ import com.sudzusama.comparephones.domain.entities.Specification
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
-class DeviceInfoFragment : Fragment(), DeviceInfo.View {
+class DeviceInfoFragment : Fragment(), DeviceInfoContract.View {
     @Inject
-    lateinit var presenter: DeviceInfo.Presenter
+    lateinit var presenter: DeviceInfoContract.Presenter
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: DeviceInfoListAdapter
@@ -33,7 +33,6 @@ class DeviceInfoFragment : Fragment(), DeviceInfo.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
         super.onViewCreated(view, savedInstanceState)
-        setupViews(view)
         setupRecyclerView(view)
         val device: Device? = arguments?.getParcelable(DEVICE_EXTRA)
         if (device != null) {
@@ -47,9 +46,6 @@ class DeviceInfoFragment : Fragment(), DeviceInfo.View {
         adapter.notifyDataSetChanged()
     }
 
-    private fun setupViews(view: View) {
-
-    }
 
     private fun setupRecyclerView(view: View) {
         recyclerView = view.findViewById(R.id.deviceinfo_rv)

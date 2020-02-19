@@ -19,10 +19,11 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
-class ComparingActivity : AppCompatActivity(), Comparing.View, HasSupportFragmentInjector {
+class ComparingActivity : AppCompatActivity(), ComparingContract.View, HasSupportFragmentInjector {
     @Inject
-    lateinit var presenter: Comparing.Presenter
-    @Inject lateinit var dispatchingAndroidInjector : DispatchingAndroidInjector<Fragment>
+    lateinit var presenter: ComparingContract.Presenter
+    @Inject
+    lateinit var dispatchingAndroidInjector : DispatchingAndroidInjector<Fragment>
 
     private lateinit var vpDevices: ViewPager
     private lateinit var tlDevices: TabLayout

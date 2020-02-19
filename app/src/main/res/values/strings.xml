@@ -1,8 +1,16 @@
 <resources>
     <string name="app_name">Compare phones</string>
-    <string name="devices_found">Devices found: %1$d </string>
+    <string name="devices_found">Found %1$d devices </string>
     <string name="label_versus">VS</string>
     <string name="button_choose_first_device">Choose first device</string>
     <string name="button_choose_second_device">Choose second device</string>
     <string name="main_compare_two_devices">Compare two devices</string>
+    <string name="bottom_navigation_item_recent">Recent</string>
+    <string name="bottom_navigation_item_compare">Compare</string>
+    <string name="bottom_navigation_item_devices">Devices</string>
+    <string name="activity_add_insert_device_name">Insert a device name</string>
+    <string name="toolbar_select_device">Select device</string>
+    <string name="adddevice_label">Select a device</string>
+    <string name="addevice_toolbar_search">Search</string>
+    <string name="adddevice_recent">Recent devices</string>
 </resources>

@@ -4,29 +4,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.addDevice.AddDeviceActivity">
+        tools:context=".ui.adddevice.AddDeviceActivity">
 
-    <include layout="@layout/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+    <include layout="@layout/toolbar" />
 
-    <EditText
-            android:id="@+id/adddevice_et_insert"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="Insert device name"
-            android:inputType="textPersonName" />
 
     <TextView
             android:id="@+id/adddevice_tv_matchescount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorGrayDark"
-            android:paddingTop="6dp"
-            android:paddingBottom="6dp"
+            android:textColor="@color/textColorPrimaryMedium"
+            android:text="@string/adddevice_recent"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:textAlignment="center" />
+
+    <View style="@style/ThinDivider" android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/adddevice_rv"

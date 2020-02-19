@@ -1,17 +1,14 @@
 package com.sudzusama.comparephones.ui.deviceinfo
 
-import com.sudzusama.comparephones.di.FragmentScope
 import dagger.Binds
 import dagger.Module
 
 @Module
 abstract class DeviceInfoModule {
-    @FragmentScope
     @Binds
-    abstract fun bindView(deviceInfoFragment: DeviceInfoFragment): DeviceInfo.View
+    abstract fun bindView(deviceInfoFragment: DeviceInfoFragment): DeviceInfoContract.View
 
-    @FragmentScope
     @Binds
-    abstract fun bindPresenter(deviceInfoPresenter: DeviceInfoPresenter): DeviceInfo.Presenter
+    abstract fun bindPresenter(deviceInfoPresenter: DeviceInfoPresenter): DeviceInfoContract.Presenter
 
 }
