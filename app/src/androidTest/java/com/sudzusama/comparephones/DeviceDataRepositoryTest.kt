@@ -2,9 +2,9 @@ package com.sudzusama.comparephones
 
 import androidx.room.Room
 import androidx.test.InstrumentationRegistry
-import com.sudzusama.comparephones.data.model.mapper.ComparsionListMapper
-import com.sudzusama.comparephones.data.model.mapper.DeviceListMapper
-import com.sudzusama.comparephones.data.model.mapper.DeviceMapper
+import com.sudzusama.comparephones.data.model.mapper.ComparsionEntityToDomainMapper
+import com.sudzusama.comparephones.data.model.mapper.datatodomain.DeviceListMapper
+import com.sudzusama.comparephones.data.model.mapper.DeviceEntityToDomainMapper
 import com.sudzusama.comparephones.data.repository.DeviceDataRepository
 import com.sudzusama.comparephones.data.source.db.DevicesDatabase
 import com.sudzusama.comparephones.data.source.network.CPApiService
@@ -35,8 +35,12 @@ class DeviceDataRepositoryTest {
         repository = DeviceDataRepository(
             db,
             api,
-            DeviceListMapper(DeviceMapper()),
-            ComparsionListMapper(DeviceMapper())
+            DeviceListMapper(
+                DeviceEntityToDomainMapper()
+            ),
+            ComparsionEntityToDomainMapper(
+                DeviceEntityToDomainMapper()
+            )
         )
     }
 
@@ -62,7 +66,7 @@ class DeviceDataRepositoryTest {
 
     @Test
     fun addDevicesToDatabase() {
-        val results = ArrayList<com.sudzusama.comparephones.data.model.Device>()
+        val results = ArrayList<com.sudzusama.comparephones.data.model.DeviceEntity>()
 
         repository.getDevices(DEVICE_NAME).subscribe()
         db.devicesDao().getDevicesByTitle(DEVICE_NAME).subscribe({results.addAll(it)}, {})

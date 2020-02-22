@@ -5,7 +5,7 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "comparsion")
-data class Comparsion(
+data class ComparsionEntity(
 
     @PrimaryKey(autoGenerate = true)
     val comparsionId: Int,
@@ -13,14 +13,14 @@ data class Comparsion(
     @ForeignKey(
         parentColumns = ["DeviceName"],
         childColumns = ["firstDeviceName"],
-        entity = Device::class
+        entity = DeviceEntity::class
     )
     val firstDeviceName: String,
 
     @ForeignKey(
         parentColumns = ["DeviceName"],
         childColumns = ["secondDeviceName"],
-        entity = Device::class
+        entity = DeviceEntity::class
     )
     val secondDeviceName: String
 )

@@ -70,7 +70,6 @@ class AddDevicePresenter @Inject constructor(
 
     }
 
-
     private fun updateMatchesList() {
         view.setMatchesCount(matches.size)
         view.updateRecyclerView()

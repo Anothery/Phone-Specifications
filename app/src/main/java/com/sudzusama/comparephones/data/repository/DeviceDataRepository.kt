@@ -1,46 +1,47 @@
 package com.sudzusama.comparephones.data.repository
 
-import android.util.Log
-import com.sudzusama.comparephones.data.model.ComparsionWithDevices
-import com.sudzusama.comparephones.data.model.Device
-import com.sudzusama.comparephones.data.model.mapper.Mapper
+import com.sudzusama.comparephones.data.model.DeviceEntity
+import com.sudzusama.comparephones.data.model.mapper.ComparsionEntityToDomainMapper
+import com.sudzusama.comparephones.data.model.mapper.DeviceEntityToDomainMapper
 import com.sudzusama.comparephones.data.source.db.DevicesDatabase
 import com.sudzusama.comparephones.data.source.network.CPApiService
+import com.sudzusama.comparephones.domain.entity.Comparsion
+import com.sudzusama.comparephones.domain.entity.Device
 import com.sudzusama.comparephones.domain.repository.DeviceRepository
+import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
-import com.sudzusama.comparephones.domain.entity.Comparsion as ComparsionDomain
-import com.sudzusama.comparephones.domain.entity.Device as DeviceDomain
 
 class DeviceDataRepository @Inject constructor(
     private val db: DevicesDatabase,
     private val devicesApi: CPApiService,
-    private val deviceListMapper: Mapper<List<Device>, List<DeviceDomain>>,
-    private val comparsionListMapper: Mapper<List<ComparsionWithDevices>, List<ComparsionDomain>>
+    private val deviceEntityToDomainMapper: DeviceEntityToDomainMapper,
+    private val comparsionEntityToDomainMapper: ComparsionEntityToDomainMapper
 ) : DeviceRepository {
 
-    override fun getDevices(deviceName: String): Single<List<DeviceDomain>> {
+    override fun getDevices(deviceName: String): Single<List<Device>> {
         return devicesApi.getDevices(deviceName)
-            .doOnSuccess{ addDevices(it) }
-            .map { deviceListMapper.map(it) }
+            .doOnSuccess { addDevices(it) }
+            .map { deviceEntityToDomainMapper.map(it) }
     }
 
-    override fun getLatestDevices(amount: Int): Single<List<DeviceDomain>> {
+    override fun getLatestDevices(amount: Int): Single<List<Device>> {
         return db.devicesDao()
             .getLatestDevices(amount)
-            .map { deviceListMapper.map(it) }
+            .map { deviceEntityToDomainMapper.map(it) }
     }
 
-    override fun getLatestComparsions(amount: Int): Single<List<ComparsionDomain>> {
+    override fun getLatestComparsions(amount: Int): Single<List<Comparsion>> {
         return db.comparsionsDao().getLatestComparsions(amount)
-            .map { comparsionListMapper.map(it) }
+            .map { comparsionEntityToDomainMapper.map(it) }
     }
 
-    private fun addDevices(devices: List<Device>) {
+    override fun addComparsion(comparsion: Comparsion): Completable {
+        return db.comparsionsDao()
+            .insertComparsion(comparsionEntityToDomainMapper.reverseMapToRawEntity(comparsion))
+    }
+
+    private fun addDevices(devices: List<DeviceEntity>) {
         db.devicesDao().insertDevices(devices)
-    }
-
-    private fun removeDevice(device: Device) {
-        db.devicesDao().deleteDevice(device)
     }
 }

@@ -5,8 +5,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Device(
-    val Brand: String?,
     val DeviceName: String,
+    val Brand: String?,
     val _2g_bands: String?,
     val _3_5mm_jack_: String?,
     val _3g_bands: String?,

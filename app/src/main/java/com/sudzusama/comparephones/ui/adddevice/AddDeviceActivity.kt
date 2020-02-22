@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,8 +27,6 @@ class AddDeviceActivity : AppCompatActivity(), AddDeviceContract.View {
     private lateinit var etInsertDevice: EditText
     private lateinit var tvMatchesCount: TextView
     private lateinit var toolbar: Toolbar
-    private lateinit var searchView: SearchView
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: AddDeviceMatchesAdapter
     private var matches = ArrayList<Device>()

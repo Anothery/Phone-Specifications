@@ -1,7 +1,6 @@
 package com.sudzusama.comparephones.domain.usecase
 
 import io.reactivex.Flowable
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -15,7 +14,6 @@ abstract class UseCase<T> {
             createUseCase()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .toFlowable()
         compositeDisposable.add(single.subscribeWith(disposableSubscriber))
     }
 
@@ -24,7 +22,6 @@ abstract class UseCase<T> {
             createUseCase()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .toFlowable()
 
         compositeDisposable.add(flowable.subscribeWith(object : DisposableSubscriber<T>() {
             override fun onComplete() {}
@@ -45,5 +42,5 @@ abstract class UseCase<T> {
         }
     }
 
-    protected abstract fun createUseCase(): Single<T>
+    protected abstract fun createUseCase(): Flowable<T>
 }
