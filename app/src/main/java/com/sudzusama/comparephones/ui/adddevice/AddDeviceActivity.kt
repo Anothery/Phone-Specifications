@@ -16,6 +16,8 @@ import com.jakewharton.rxbinding3.widget.textChanges
 import com.sudzusama.comparephones.R
 import com.sudzusama.comparephones.domain.entities.Device
 import com.sudzusama.comparephones.utils.DEVICE_EXTRA
+import com.sudzusama.comparephones.utils.hideKeyboard
+import com.sudzusama.comparephones.utils.showKeyboard
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
@@ -36,7 +38,6 @@ class AddDeviceActivity : AppCompatActivity(), AddDeviceContract.View {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_device)
-
         setupRecyclerView()
         initViews()
         setupToolbar()
@@ -54,14 +55,20 @@ class AddDeviceActivity : AppCompatActivity(), AddDeviceContract.View {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        //TODO move logic to presenter
         when (item?.itemId) {
-            android.R.id.home -> finish()
+            android.R.id.home -> {
+                this.hideKeyboard()
+                finish()
+            }
             R.id.toolbar_action_search -> {
-                etInsertDevice.visibility = View.VISIBLE
-                etInsertDevice.requestFocus()
                 item.isVisible = false
                 supportActionBar?.setDisplayShowTitleEnabled(false)
+                etInsertDevice.visibility = View.VISIBLE
+                etInsertDevice.requestFocus()
+                this.showKeyboard()
             }
+
         }
         return super.onOptionsItemSelected(item)
     }
@@ -82,7 +89,6 @@ class AddDeviceActivity : AppCompatActivity(), AddDeviceContract.View {
         etInsertDevice = findViewById(R.id.adddevice_et_insert)
         tvMatchesCount = findViewById(R.id.adddevice_tv_matchescount)
     }
-
 
     override fun disableMatchesCount() {
         tvMatchesCount.visibility = View.GONE

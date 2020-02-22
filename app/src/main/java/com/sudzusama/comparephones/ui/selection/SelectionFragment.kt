@@ -80,16 +80,6 @@ class SelectionFragment : Fragment(), SelectionContract.View, FragmentLifecycle 
         presenter.onViewResult(requestCode, resultCode, data)
     }
 
-    override fun onStop() {
-        super.onStop()
-        Log.d(this::class.java.simpleName, "STOPPED")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d(this::class.java.simpleName, "DESTROYED")
-    }
-
     override fun loadFirstDeviceInfo(deviceName: String) {
         //TODO Image
         tvFirstDevice.text = deviceName

@@ -3,7 +3,6 @@ package com.sudzusama.comparephones.ui.start
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -78,7 +77,13 @@ class StartActivity : AppCompatActivity(), StartContract.View, HasSupportFragmen
                 selectedMenuItem = bottomNavigationView.menu.getItem(position)
                 selectedMenuItem.isChecked = true
 
-                val fragment = viewPager[position] as FragmentLifecycle
+
+                val fragment = supportFragmentManager.findFragmentByTag(
+                    "android:switcher:"
+                            + R.id.activity_start_vp
+                            + ":"
+                            + viewPager.currentItem
+                ) as FragmentLifecycle
                 fragment.onResumeFragment()
             }
         })
@@ -102,6 +107,7 @@ class StartActivity : AppCompatActivity(), StartContract.View, HasSupportFragmen
         override fun getItem(position: Int): Fragment {
             return mFragmentList[position]
         }
+
 
         override fun getCount(): Int {
             return mFragmentList.size

@@ -2,6 +2,7 @@ package com.sudzusama.comparephones.ui.recent
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,5 +36,6 @@ class RecentFragment : Fragment(), RecentContract.View, FragmentLifecycle {
     override fun onPauseFragment() {}
 
     //TODO update views on resume
-    override fun onResumeFragment() {}
+    override fun onResumeFragment() {
+        Log.d(this::class.java.simpleName, "RESUMED")}
 }
