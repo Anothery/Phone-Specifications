@@ -66,7 +66,8 @@ class AddDevicePresenter @Inject constructor(
         //TODO("View toast")
         Log.e(TAG, t.message)
         matches.clear()
-        view.setMatchesCount(0)
+        updateMatchesList()
+
     }
 
 
