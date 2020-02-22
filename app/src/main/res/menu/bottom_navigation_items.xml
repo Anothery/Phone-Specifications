@@ -4,16 +4,16 @@
         android:layout_height="wrap_content">
 
     <item
-            android:id="@+id/bottom_navigation_item_recent"
+            android:id="@+id/navigation_item_recent"
             android:icon="@drawable/baseline_history_24"
             android:title="@string/bottom_navigation_item_recent" />
     <item
-            android:id="@+id/bottom_navigation_item_compare"
+            android:id="@+id/navigation_item_compare"
             android:icon="@drawable/baseline_compare_arrows_24"
             android:title="@string/bottom_navigation_item_compare" />
 
     <item
-            android:id="@+id/bottom_navigation_item_devices"
+            android:id="@+id/navigation_item_devices"
             android:icon="@drawable/baseline_smartphone_24"
             android:title="@string/bottom_navigation_item_devices" />
 

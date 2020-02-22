@@ -13,4 +13,9 @@
     <string name="adddevice_label">Select a device</string>
     <string name="addevice_toolbar_search">Search</string>
     <string name="adddevice_recent">Recent devices</string>
+    <string name="recent_comparsions">Recent comparsions</string>
+    <string name="view_all">View all</string>
+    <string name="recent_devices">Recent devices</string>
+    <string name="no_recent_comparsions_yet">No recent comparsions yet</string>
+    <string name="no_recent_devices_yet">No recent devices yet</string>
 </resources>

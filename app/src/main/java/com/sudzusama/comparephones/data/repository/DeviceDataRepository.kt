@@ -1,6 +1,5 @@
 package com.sudzusama.comparephones.data.repository
 
-import com.sudzusama.comparephones.data.model.Comparsion
 import com.sudzusama.comparephones.data.model.ComparsionWithDevices
 import com.sudzusama.comparephones.data.model.Device
 import com.sudzusama.comparephones.data.model.mapper.Mapper
@@ -8,7 +7,6 @@ import com.sudzusama.comparephones.data.source.db.DevicesDatabase
 import com.sudzusama.comparephones.data.source.network.CPApiService
 import com.sudzusama.comparephones.domain.repositories.DeviceRepository
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import com.sudzusama.comparephones.domain.entities.Comparsion as ComparsionDomain
@@ -23,9 +21,12 @@ class DeviceDataRepository @Inject constructor(
 
     override fun getDevices(deviceName: String): Single<List<DeviceDomain>> {
         return devicesApi.getDevices(deviceName)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .doAfterSuccess { addDevices(it) }
             .map { deviceListMapper.map(it) }
+    }
+
+    override fun getLatestDevices(amount: Int): Single<List<Device>> {
+        return db.devicesDao().getLatestDevices(20)
     }
 
     override fun getLatestComparsions(amount: Int): Single<List<ComparsionDomain>> {
@@ -33,9 +34,10 @@ class DeviceDataRepository @Inject constructor(
             .map { comparsionListMapper.map(it) }
     }
 
-    private fun addDevice(device: Device) {
-        db.devicesDao().insertDevice(device)
+    private fun addDevices(devices: List<Device>) {
+        db.devicesDao().insertDevices(devices)
     }
+
 
     private fun removeDevice(device: Device) {
         db.devicesDao().deleteDevice(device)

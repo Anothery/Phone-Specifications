@@ -21,7 +21,7 @@
         <activity android:name=".ui.comparing.ComparingActivity" />
         <activity
                 android:name=".ui.adddevice.AddDeviceActivity"
-                android:label="@string/adddevice_label"/>
+                android:label="@string/adddevice_label" />
     </application>
 
 </manifest>

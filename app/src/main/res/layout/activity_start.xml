@@ -6,6 +6,16 @@
         android:layout_height="match_parent"
         tools:context=".ui.start.StartActivity">
 
+    <androidx.viewpager.widget.ViewPager
+            android:id="@+id/activity_start_vp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/activity_start_bottom_navigation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+</androidx.viewpager.widget.ViewPager>
     <FrameLayout
             android:id="@+id/activity_start_frame_layout"
             android:layout_width="match_parent"
@@ -18,14 +28,12 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/activity_start_bottom_navigation"
+            style="@style/BottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@color/backgroundGrayLight"
-            app:elevation="6dp"
-            app:itemIconTint="@drawable/bottom_nav_icon_color_selector"
-            app:itemTextColor="@drawable/bottom_nav_icon_color_selector"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/bottom_navigation_items" />
 </androidx.constraintlayout.widget.ConstraintLayout>

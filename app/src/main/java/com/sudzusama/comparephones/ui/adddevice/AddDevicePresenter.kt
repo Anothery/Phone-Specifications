@@ -6,6 +6,7 @@ import com.sudzusama.comparephones.domain.repositories.DeviceRepository
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -37,6 +38,8 @@ class AddDevicePresenter @Inject constructor(
         if (text.isNotEmpty()) {
             disposable.add(
                 deviceRepository.getDevices(text)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::onDeviceListArrived, this::onDeviceListError)
             )
         } else {

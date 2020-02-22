@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <style name="CrossButtonStyle" parent="@style/Widget.AppCompat.Button.Borderless">
         <item name="android:background">@drawable/close_state</item>
+    </style>
+
+    <style name="BottomNavigationView">
+        <item name="android:background">@android:color/white</item>
+        <item name="itemIconTint">@drawable/bottom_nav_icon_color_selector</item>
+        <item name="itemTextColor">@drawable/bottom_nav_icon_color_selector</item>
+        <item name="itemTextAppearanceActive">@style/BottomNavigationView.Active</item>
+        <item name="itemTextAppearanceInactive">@style/BottomNavigationView.Inactive</item>
+        <item name="android:elevation">6dp</item>
     </style>
 </resources>

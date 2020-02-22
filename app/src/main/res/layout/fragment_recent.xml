@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+    <LinearLayout
+            android:id="@+id/recent_ll_comparsions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/recent_tv_comparsions"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/recent_comparsions"
+                android:textAllCaps="true"
+                android:textSize="16sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recent_rv_comparsions"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
+                android:visibility="gone" />
+
+        <TextView
+                android:id="@+id/recent_tv_no_comparsions_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="6dp"
+                android:text="@string/no_recent_comparsions_yet"
+                android:textColor="@color/textColorPrimaryMedium" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center|center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/view_all"
+                android:textAllCaps="true"
+                android:textColor="@color/colorSecondary"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/recent_tv_devices"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/recent_devices"
+                android:textAllCaps="true"
+                android:textSize="16sp" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recent_rv_devices"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:visibility="gone" />
+
+        <TextView
+                android:id="@+id/recent_tv_no_devices_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="6dp"
+                android:text="@string/no_recent_devices_yet"
+                android:textColor="@color/textColorPrimaryMedium" />
+
+
+        <TextView
+                android:id="@+id/recent_tv_viewall_devices"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center|center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/view_all"
+                android:textAllCaps="true"
+                android:textColor="@color/colorSecondary"
+                android:textSize="16sp"
+                android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

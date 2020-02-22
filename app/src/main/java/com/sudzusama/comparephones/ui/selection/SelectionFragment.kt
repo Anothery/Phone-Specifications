@@ -3,6 +3,7 @@ package com.sudzusama.comparephones.ui.selection
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,11 +16,12 @@ import com.sudzusama.comparephones.domain.entities.Device
 import com.sudzusama.comparephones.ui.adddevice.AddDeviceActivity
 import com.sudzusama.comparephones.ui.comparing.ComparingActivity
 import com.sudzusama.comparephones.utils.FIRST_DEVICE_EXTRA
+import com.sudzusama.comparephones.utils.FragmentLifecycle
 import com.sudzusama.comparephones.utils.SECOND_DEVICE_EXTRA
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
-class SelectionFragment : Fragment(), SelectionContract.View {
+class SelectionFragment : Fragment(), SelectionContract.View, FragmentLifecycle {
     @Inject
     lateinit var presenter: SelectionContract.Presenter
     private lateinit var btnChooseFirstDevice: Button
@@ -31,13 +33,6 @@ class SelectionFragment : Fragment(), SelectionContract.View {
     private lateinit var btnCompare: Button
     private lateinit var btnCloseFirstDeviceView: Button
     private lateinit var btnCloseSecondDeviceView: Button
-
-
-    companion object {
-        fun newInstance(): SelectionFragment {
-            return SelectionFragment()
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +47,7 @@ class SelectionFragment : Fragment(), SelectionContract.View {
         return inflater.inflate(R.layout.fragment_selection, container, false)
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         AndroidSupportInjection.inject(this)
     }
@@ -85,6 +80,15 @@ class SelectionFragment : Fragment(), SelectionContract.View {
         presenter.onViewResult(requestCode, resultCode, data)
     }
 
+    override fun onStop() {
+        super.onStop()
+        Log.d(this::class.java.simpleName, "STOPPED")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(this::class.java.simpleName, "DESTROYED")
+    }
 
     override fun loadFirstDeviceInfo(deviceName: String) {
         //TODO Image
@@ -166,4 +170,16 @@ class SelectionFragment : Fragment(), SelectionContract.View {
     override fun disableCompareButton() {
         btnCompare.visibility = View.GONE
     }
+
+    companion object {
+        fun newInstance(): SelectionFragment {
+            return SelectionFragment()
+        }
+    }
+
+    override fun onPauseFragment() {}
+
+    override fun onResumeFragment() {}
+
+
 }
