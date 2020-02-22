@@ -1,7 +1,7 @@
 package com.sudzusama.comparephones.ui.selection
 
 import android.content.Intent
-import com.sudzusama.comparephones.domain.entities.Device
+import com.sudzusama.comparephones.domain.entity.Device
 
 interface SelectionContract {
     interface View {

@@ -4,7 +4,7 @@ import com.sudzusama.comparephones.data.model.mapper.MapperModule
 import com.sudzusama.comparephones.data.repository.DeviceDataRepository
 import com.sudzusama.comparephones.data.source.db.DatabaseModule
 import com.sudzusama.comparephones.data.source.network.NetworkModule
-import com.sudzusama.comparephones.domain.repositories.DeviceRepository
+import com.sudzusama.comparephones.domain.repository.DeviceRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

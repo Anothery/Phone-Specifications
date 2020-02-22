@@ -6,7 +6,7 @@ import io.reactivex.Single
 
 @Dao
 interface DevicesDao {
-    @Query("SELECT * FROM device WHERE DeviceName LIKE :deviceName")
+    @Query("SELECT * FROM device WHERE DeviceName LIKE '%' || :deviceName || '%'")
     fun getDevicesByTitle(deviceName: String): Single<List<Device>>
 
     @Query("SELECT * FROM device LIMIT :amount")

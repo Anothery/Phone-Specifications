@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.sudzusama.comparephones.R
-import com.sudzusama.comparephones.domain.entities.Device
+import com.sudzusama.comparephones.domain.entity.Device
 import com.sudzusama.comparephones.utils.DEVICE_EXTRA
 import com.sudzusama.comparephones.utils.hideKeyboard
 import com.sudzusama.comparephones.utils.showKeyboard
@@ -107,6 +107,7 @@ class AddDeviceActivity : AppCompatActivity(), AddDeviceContract.View {
     }
 
     override fun finishActivity(result: Device) {
+        this.hideKeyboard()
         val intent = Intent()
         intent.putExtra(DEVICE_EXTRA, result)
         setResult(1, intent)

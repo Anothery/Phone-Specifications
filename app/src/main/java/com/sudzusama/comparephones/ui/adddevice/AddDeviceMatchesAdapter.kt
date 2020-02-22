@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sudzusama.comparephones.R
-import com.sudzusama.comparephones.domain.entities.Device
+import com.sudzusama.comparephones.domain.entity.Device
 
 
 class AddDeviceMatchesAdapter(

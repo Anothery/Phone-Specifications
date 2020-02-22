@@ -2,8 +2,8 @@ package com.sudzusama.comparephones.data.model.mapper
 
 import com.sudzusama.comparephones.data.model.ComparsionWithDevices
 import com.sudzusama.comparephones.data.model.Device
-import com.sudzusama.comparephones.domain.entities.Comparsion
-import com.sudzusama.comparephones.domain.entities.Device as DeviceDomain
+import com.sudzusama.comparephones.domain.entity.Comparsion
+import com.sudzusama.comparephones.domain.entity.Device as DeviceDomain
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

@@ -1,4 +1,4 @@
-package com.sudzusama.comparephones.domain.entities
+package com.sudzusama.comparephones.domain.entity
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

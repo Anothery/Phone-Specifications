@@ -1,11 +1,11 @@
 package com.sudzusama.comparephones.data.model.mapper
 
 import com.sudzusama.comparephones.data.model.Device
-import com.sudzusama.comparephones.domain.entities.Device as DeviceDomain
+import com.sudzusama.comparephones.domain.entity.Device as DeviceDomain
 
 class DeviceMapper  : Mapper<Device, DeviceDomain> {
     override fun map(source: Device): DeviceDomain {
-        return com.sudzusama.comparephones.domain.entities.Device(
+        return com.sudzusama.comparephones.domain.entity.Device(
             source.Brand,
             source.DeviceName,
             source._2g_bands,

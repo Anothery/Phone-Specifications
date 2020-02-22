@@ -1,23 +1,26 @@
 package com.sudzusama.comparephones.ui.adddevice
 
 import android.util.Log
-import com.sudzusama.comparephones.domain.entities.Device
-import com.sudzusama.comparephones.domain.repositories.DeviceRepository
+import com.sudzusama.comparephones.domain.entity.Device
+import com.sudzusama.comparephones.domain.usecase.UseCaseDevices
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class AddDevicePresenter @Inject constructor(
     val view: AddDeviceContract.View,
-    private val deviceRepository: DeviceRepository
+    private val useCaseDevices: UseCaseDevices
 ) : AddDeviceContract.Presenter {
 
-    private val disposable = CompositeDisposable()
     private lateinit var matches: ArrayList<Device>
+    private val disposable = CompositeDisposable()
+
+    companion object {
+        val TAG: String = this::class.java.simpleName
+    }
 
     override fun onCreate(matches: ArrayList<Device>) {
         this.matches = matches
@@ -28,20 +31,21 @@ class AddDevicePresenter @Inject constructor(
             observable
                 .debounce(200, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onTextArrived) {Log.d(this::class.java.simpleName, it.message)}
+                .subscribe(this::onTextArrived, this::onObserveFromTextError)
         )
+    }
+
+    private fun onObserveFromTextError(throwable: Throwable) {
+        // TODO View toast
+        Log.e(TAG, throwable.message)
     }
 
     private fun onTextArrived(char: CharSequence) {
         val text = char.toString()
         view.enableMatchesCount()
         if (text.isNotEmpty()) {
-            disposable.add(
-                deviceRepository.getDevices(text)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::onDeviceListArrived, this::onDeviceListError)
-            )
+            useCaseDevices.searchDeviceByName(text)
+            useCaseDevices.subscribe(this::onDeviceListArrived, this::onDeviceListError)
         } else {
             matches.clear()
         }
@@ -58,8 +62,9 @@ class AddDevicePresenter @Inject constructor(
         }
     }
 
-    private fun onDeviceListError(ex: Throwable) {
-        Log.e(AddDevicePresenter::class.java.name, ex.message)
+    private fun onDeviceListError(t: Throwable) {
+        //TODO("View toast")
+        Log.e(TAG, t.message)
         matches.clear()
         view.setMatchesCount(0)
     }
@@ -77,7 +82,7 @@ class AddDevicePresenter @Inject constructor(
     }
 
     override fun onDestroy() {
-        disposable.clear()
+        useCaseDevices.dispose()
     }
 
 }

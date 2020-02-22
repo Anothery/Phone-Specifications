@@ -11,7 +11,7 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.sudzusama.comparephones.utils.DEVICE_EXTRA
 import com.sudzusama.comparephones.R
-import com.sudzusama.comparephones.domain.entities.Device
+import com.sudzusama.comparephones.domain.entity.Device
 import com.sudzusama.comparephones.ui.deviceinfo.DeviceInfoFragment
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector

@@ -1,4 +1,4 @@
-package com.sudzusama.comparephones.domain.entities
+package com.sudzusama.comparephones.domain.entity
 
 data class Specification(
     val title : String,

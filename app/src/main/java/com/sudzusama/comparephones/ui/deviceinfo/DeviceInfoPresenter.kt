@@ -1,7 +1,7 @@
 package com.sudzusama.comparephones.ui.deviceinfo
 
-import com.sudzusama.comparephones.domain.entities.Device
-import com.sudzusama.comparephones.domain.entities.Specification
+import com.sudzusama.comparephones.domain.entity.Device
+import com.sudzusama.comparephones.domain.entity.Specification
 import javax.inject.Inject
 import kotlin.reflect.full.memberProperties
 

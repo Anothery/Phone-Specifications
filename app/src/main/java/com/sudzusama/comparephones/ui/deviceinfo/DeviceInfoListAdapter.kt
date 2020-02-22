@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sudzusama.comparephones.R
-import com.sudzusama.comparephones.domain.entities.Specification
+import com.sudzusama.comparephones.domain.entity.Specification
 
 class DeviceInfoListAdapter(private val specifications: ArrayList<Specification>) :
     RecyclerView.Adapter<DeviceInfoListAdapter.ViewHolder>() {

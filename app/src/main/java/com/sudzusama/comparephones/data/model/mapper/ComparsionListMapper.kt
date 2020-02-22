@@ -3,8 +3,8 @@ package com.sudzusama.comparephones.data.model.mapper
 import com.sudzusama.comparephones.data.model.ComparsionWithDevices
 import com.sudzusama.comparephones.data.model.Device
 import javax.inject.Inject
-import com.sudzusama.comparephones.domain.entities.Comparsion as ComparsionDomain
-import com.sudzusama.comparephones.domain.entities.Device as DeviceDomain
+import com.sudzusama.comparephones.domain.entity.Comparsion as ComparsionDomain
+import com.sudzusama.comparephones.domain.entity.Device as DeviceDomain
 
 class ComparsionListMapper @Inject constructor(private val deviceMapper: Mapper<Device, DeviceDomain>) :
     Mapper<List<ComparsionWithDevices>, List<ComparsionDomain>> {
