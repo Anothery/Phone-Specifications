@@ -1,7 +1,7 @@
 # phone-specs
 MVP Приложение для сравнения характеристик мобильных устройств
 
-Используемые технологии: RxJava 2, Retrofit, Dagger 2, RxBinding
+Используемые технологии: Kotlin, RxJava 2 |  RxBinding, Retrofit, Dagger 2, Room
 
 
 ## TODO
