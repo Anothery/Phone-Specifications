@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class ComparsionEntity(
 
     @PrimaryKey(autoGenerate = true)
-    val comparsionId: Int,
+    val comparsionId: Int = 0,
 
     @ForeignKey(
         parentColumns = ["DeviceName"],

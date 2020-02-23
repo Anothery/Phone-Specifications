@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.google.android.material.appbar.AppBarLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize"
-            app:theme="@style/Toolbar">
-        <EditText
-                android:id="@+id/adddevice_et_insert"
-                android:layout_width="220dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="8dp"
-                android:background="@null"
-                android:textColor="@color/textColorPrimary"
-                android:textColorHint="@color/textColorPrimaryLight"
-                android:ems="10"
-                android:maxLines="1"
-                android:inputType="text"
-                android:visibility="gone"
-                tools:visibility="visible"
-                android:hint="@string/activity_add_insert_device_name" />
-    </androidx.appcompat.widget.Toolbar>
-</com.google.android.material.appbar.AppBarLayout>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/Toolbar">
+
+    <EditText
+            android:id="@+id/adddevice_et_insert"
+            android:layout_width="220dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="8dp"
+            android:background="@null"
+            android:ems="10"
+            android:hint="@string/activity_add_insert_device_name"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@color/textColorPrimary"
+            android:textColorHint="@color/textColorPrimaryLight"
+            android:visibility="gone"
+            tools:visibility="visible" />
+</androidx.appcompat.widget.Toolbar>

@@ -9,5 +9,5 @@ interface DeviceRepository {
     fun getDevices(deviceName: String): Single<List<Device>>
     fun getLatestComparsions(amount: Int): Single<List<Comparsion>>
     fun getLatestDevices(amount: Int): Single<List<Device>>
-    fun addComparsion(comparsion: Comparsion) : Completable
+    fun addComparsion(comparsion: Comparsion): Completable
 }

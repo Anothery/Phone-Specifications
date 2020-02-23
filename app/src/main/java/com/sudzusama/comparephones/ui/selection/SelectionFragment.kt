@@ -11,12 +11,9 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.sudzusama.comparephones.R
-import com.sudzusama.comparephones.domain.entity.Device
 import com.sudzusama.comparephones.ui.adddevice.AddDeviceActivity
 import com.sudzusama.comparephones.ui.comparing.ComparingActivity
-import com.sudzusama.comparephones.utils.FIRST_DEVICE_EXTRA
 import com.sudzusama.comparephones.utils.FragmentLifecycle
-import com.sudzusama.comparephones.utils.SECOND_DEVICE_EXTRA
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -108,10 +105,8 @@ class SelectionFragment : Fragment(), SelectionContract.View, FragmentLifecycle 
         presenter.onResume()
     }
 
-    override fun startComparingActivity(firstDevice: Device, secondDevice: Device) {
+    override fun startComparingActivity() {
         val intent = Intent(activity, ComparingActivity::class.java)
-        intent.putExtra(FIRST_DEVICE_EXTRA, firstDevice)
-        intent.putExtra(SECOND_DEVICE_EXTRA, secondDevice)
         startActivity(intent)
     }
 

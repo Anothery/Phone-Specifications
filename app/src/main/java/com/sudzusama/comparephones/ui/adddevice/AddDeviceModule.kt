@@ -3,6 +3,7 @@ package com.sudzusama.comparephones.ui.adddevice
 import com.sudzusama.comparephones.di.PerActivity
 import com.sudzusama.comparephones.domain.repository.DeviceRepository
 import com.sudzusama.comparephones.domain.usecase.UseCaseDevices
+import com.sudzusama.comparephones.domain.usecase.UseCaseSaveComparsion
 import dagger.Module
 import dagger.Provides
 

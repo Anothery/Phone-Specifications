@@ -21,14 +21,8 @@
         <item name="android:background">@drawable/baseline_close_24</item>
     </style>
 
-    <style name="BoldDivider">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">6dp</item>
-        <item name="android:background">@drawable/bg_divider</item>
-    </style>
 
-
-    <style name="ThinDivider">
+    <style name="Divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:background">@drawable/bg_divider</item>

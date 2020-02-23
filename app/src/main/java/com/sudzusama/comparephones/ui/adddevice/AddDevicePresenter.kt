@@ -3,6 +3,7 @@ package com.sudzusama.comparephones.ui.adddevice
 import android.util.Log
 import com.sudzusama.comparephones.domain.entity.Device
 import com.sudzusama.comparephones.domain.usecase.UseCaseDevices
+import com.sudzusama.comparephones.domain.usecase.UseCaseSaveComparsion
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

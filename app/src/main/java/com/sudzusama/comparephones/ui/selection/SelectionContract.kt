@@ -1,7 +1,6 @@
 package com.sudzusama.comparephones.ui.selection
 
 import android.content.Intent
-import com.sudzusama.comparephones.domain.entity.Device
 
 interface SelectionContract {
     interface View {
@@ -17,7 +16,7 @@ interface SelectionContract {
         fun disableFirstDeviceView()
         fun enableCompareButton()
         fun disableCompareButton()
-        fun startComparingActivity(firstDevice: Device, secondDevice: Device)
+        fun startComparingActivity()
         fun startAddDeviceActivity(requestCode: Int)
         fun enableButtons()
         fun disableButtons()

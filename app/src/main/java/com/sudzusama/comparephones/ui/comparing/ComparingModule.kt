@@ -1,13 +1,25 @@
 package com.sudzusama.comparephones.ui.comparing
 
-import dagger.Binds
+import com.sudzusama.comparephones.di.PerActivity
+import com.sudzusama.comparephones.domain.repository.DeviceRepository
+import com.sudzusama.comparephones.domain.usecase.UseCaseRecentComparsions
 import dagger.Module
+import dagger.Provides
 
 @Module
-abstract class ComparingModule {
-    @Binds
-    abstract fun bindView(comparingActivity: ComparingActivity): ComparingContract.View
+class ComparingModule {
+    @PerActivity
+    @Provides
+    fun provideView(comparingActivity: ComparingActivity): ComparingContract.View =
+        comparingActivity
 
-    @Binds
-    abstract fun bindPresenter(comparingPresenter: ComparingPresenter): ComparingContract.Presenter
+    @PerActivity
+    @Provides
+    fun providePresenter(comparingPresenter: ComparingPresenter): ComparingContract.Presenter =
+        comparingPresenter
+
+    @PerActivity
+    @Provides
+    fun provideUseCaseRecentComparsions(repository: DeviceRepository) =
+        UseCaseRecentComparsions(repository)
 }

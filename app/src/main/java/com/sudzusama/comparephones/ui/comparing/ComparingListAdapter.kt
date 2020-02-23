@@ -1,4 +1,4 @@
-package com.sudzusama.comparephones.ui.deviceinfo
+package com.sudzusama.comparephones.ui.comparing
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sudzusama.comparephones.R
 import com.sudzusama.comparephones.domain.entity.Specification
 
-class DeviceInfoListAdapter(private val specifications: ArrayList<Specification>) :
-    RecyclerView.Adapter<DeviceInfoListAdapter.ViewHolder>() {
+class ComparingListAdapter(private val specifications: ArrayList<Specification>) :
+    RecyclerView.Adapter<ComparingListAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int {
         return specifications.size
@@ -17,22 +17,21 @@ class DeviceInfoListAdapter(private val specifications: ArrayList<Specification>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvSpecTitle.text = specifications[position].title
-        holder.tvSpecDescription.text = specifications[position].description
+        holder.tvSpecFirstDescription.text = specifications[position].firstDeviceDescription
+        holder.tvSpecSecondDescription.text = specifications[position].secondDeviceDescription
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.deviceinfo_list_layout, parent, false)
+            .inflate(R.layout.comparsion_specs_list_layout, parent, false)
         return ViewHolder(view)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var tvSpecTitle: TextView
-        var tvSpecDescription: TextView
+        val tvSpecTitle: TextView = itemView.findViewById(R.id.comparsion_specs_list_tv)
+        val tvSpecFirstDescription: TextView = itemView.findViewById(R.id.comparsion_specs_tv_first)
+        val tvSpecSecondDescription: TextView =
+            itemView.findViewById(R.id.comparsion_specs_tv_second)
 
-        init {
-            tvSpecTitle = itemView.findViewById(R.id.deviceinfolist_tv_spectitle)
-            tvSpecDescription = itemView.findViewById(R.id.deviceinfolist_tv_specdescription)
-        }
     }
 }

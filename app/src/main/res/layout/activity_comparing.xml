@@ -1,25 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:theme="@style/AppTheme"
         tools:context=".ui.comparing.ComparingActivity">
-    <include layout="@layout/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
 
-    <com.google.android.material.tabs.TabLayout
-            android:id="@+id/comparing_tl_devices"
+    <include
+            layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-    <androidx.viewpager.widget.ViewPager
-            android:id="@+id/comparing_vp_devices"
+    <View
+            style="@style/Divider"
             android:layout_width="match_parent"
-            android:layout_height="0px"
-            android:layout_weight="1"
-            android:background="@android:color/white">
+            android:layout_height="1dp" />
 
-    </androidx.viewpager.widget.ViewPager>
+    <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                    <ImageView
+                            android:id="@+id/activity_comparing_iv_first"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:tint="@color/colorPrimaryDark"
+                            app:srcCompat="@drawable/baseline_smartphone_24" />
+
+                    <TextView
+                            android:id="@+id/activity_comparing_tv_first"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="6dp"
+                            android:textColor="@color/colorSecondary"
+                            android:textSize="18sp"
+                            tools:text="First device name" />
+                </LinearLayout>
+
+                <View
+                        style="@style/Divider"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent" />
+
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                    <ImageView
+                            android:id="@+id/activity_comparing_iv_second"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:tint="@color/colorPrimaryDark"
+                            app:srcCompat="@drawable/baseline_smartphone_24" />
+
+                    <TextView
+                            android:id="@+id/activity_comparing_tv_second"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="6dp"
+                            android:textColor="@color/colorSecondary"
+                            android:textSize="18sp"
+                            tools:text="First device name" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                    style="@style/Divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/activity_comparing_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
 </LinearLayout>

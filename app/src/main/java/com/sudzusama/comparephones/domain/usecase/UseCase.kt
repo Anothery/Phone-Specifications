@@ -10,11 +10,11 @@ abstract class UseCase<T> {
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     fun subscribe(disposableSubscriber: DisposableSubscriber<T>) {
-        val single: Flowable<T> =
+        val flowable: Flowable<T> =
             createUseCase()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-        compositeDisposable.add(single.subscribeWith(disposableSubscriber))
+        compositeDisposable.add(flowable.subscribeWith(disposableSubscriber))
     }
 
     fun subscribe(onNextFunc: (T) -> Unit, onErrorFunc: (Throwable) -> Unit) {
@@ -34,7 +34,6 @@ abstract class UseCase<T> {
             }
         }))
     }
-
 
     fun dispose() {
         if (!compositeDisposable.isDisposed) {

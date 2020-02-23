@@ -6,7 +6,7 @@ import io.reactivex.Flowable
 import io.reactivex.Single
 import javax.inject.Inject
 
-class UseCaseDevices @Inject constructor(val repository: DeviceRepository) :
+class UseCaseDevices @Inject constructor(private val repository: DeviceRepository) :
     UseCase<List<Device>>() {
     private lateinit var deviceName: String
 

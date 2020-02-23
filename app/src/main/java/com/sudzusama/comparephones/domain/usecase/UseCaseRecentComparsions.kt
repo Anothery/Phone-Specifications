@@ -6,9 +6,9 @@ import io.reactivex.Flowable
 import javax.inject.Inject
 
 
-class UseCaseRecentComparsions @Inject constructor(val repository: DeviceRepository) :
+class UseCaseRecentComparsions @Inject constructor(private val repository: DeviceRepository) :
     UseCase<List<Comparsion>>() {
-    private var comparsionAmount = 0
+    private var comparsionAmount = 1
 
     fun setComparsionAmount(amount: Int) {
         comparsionAmount = amount

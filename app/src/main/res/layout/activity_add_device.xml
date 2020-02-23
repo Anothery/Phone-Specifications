@@ -8,19 +8,25 @@
 
     <include layout="@layout/toolbar" />
 
+    <View
+            style="@style/Divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
 
     <TextView
             android:id="@+id/adddevice_tv_matchescount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/textColorPrimaryMedium"
-            android:text="@string/adddevice_recent"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:textAlignment="center" />
+            android:text="@string/adddevice_recent"
+            android:textAlignment="center"
+            android:textColor="@color/textColorPrimaryMedium" />
 
-    <View style="@style/ThinDivider" android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"/>
+    <View
+            style="@style/Divider"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp" />
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/adddevice_rv"

@@ -1,13 +1,25 @@
 package com.sudzusama.comparephones.ui.selection
 
-import dagger.Binds
+import com.sudzusama.comparephones.di.PerFragment
+import com.sudzusama.comparephones.domain.repository.DeviceRepository
+import com.sudzusama.comparephones.domain.usecase.UseCaseSaveComparsion
 import dagger.Module
+import dagger.Provides
 
 @Module
-abstract class SelectionModule {
-    @Binds
-    abstract fun bindView(selectionFragment: SelectionFragment): SelectionContract.View
+class SelectionModule {
+    @PerFragment
+    @Provides
+    fun provideView(selectionFragment: SelectionFragment): SelectionContract.View =
+        selectionFragment
 
-    @Binds
-    abstract fun bindPresenter(selectionPresenter: SelectionPresenter): SelectionContract.Presenter
+    @PerFragment
+    @Provides
+    fun providePresenter(selectionPresenter: SelectionPresenter): SelectionContract.Presenter =
+        selectionPresenter
+
+    @PerFragment
+    @Provides
+    fun provideSaveComparsionUseCase(repository: DeviceRepository) =
+        UseCaseSaveComparsion(repository)
 }

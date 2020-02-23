@@ -1,24 +1,57 @@
 package com.sudzusama.comparephones.ui.comparing
 
-import android.content.Intent
-import com.sudzusama.comparephones.utils.FIRST_DEVICE_EXTRA
-import com.sudzusama.comparephones.utils.SECOND_DEVICE_EXTRA
+import android.util.Log
+import com.sudzusama.comparephones.domain.entity.Comparsion
 import com.sudzusama.comparephones.domain.entity.Device
+import com.sudzusama.comparephones.domain.entity.Specification
+import com.sudzusama.comparephones.domain.usecase.UseCaseRecentComparsions
 import javax.inject.Inject
+import kotlin.reflect.full.memberProperties
 
-class ComparingPresenter @Inject constructor(val view: ComparingContract.View) : ComparingContract.Presenter {
+class ComparingPresenter @Inject constructor(
+    val view: ComparingContract.View,
+    private val useCaseRecentComparsions: UseCaseRecentComparsions
+) : ComparingContract.Presenter {
+    private lateinit var specifications: ArrayList<Specification>
 
+    override fun onCreate(specs: ArrayList<Specification>) {
+        specifications = specs
+        getLatestComparsion()
+    }
 
-    override fun onCreate(viewIntent: Intent) {
-        val firstDevice: Device = viewIntent.getParcelableExtra(FIRST_DEVICE_EXTRA)
-        val secondDevice: Device = viewIntent.getParcelableExtra(SECOND_DEVICE_EXTRA)
-
-        view.setupViewPager(
-            firstDevice,
-            secondDevice,
-            firstDevice.DeviceName,
-            secondDevice.DeviceName
+    private fun getLatestComparsion() {
+        useCaseRecentComparsions.setComparsionAmount(1)
+        useCaseRecentComparsions.subscribe(
+            this::onLatestComparsionReceived,
+            this::onLatestComparsionReceivingError
         )
     }
+
+    private fun onLatestComparsionReceived(list: List<Comparsion>) {
+        val latestComparsion = list[0]
+        fillSpecificationsList(latestComparsion)
+    }
+
+    private fun fillSpecificationsList(comparsion: Comparsion) {
+        view.setFirstDeviceTitle(comparsion.firstDevice.DeviceName)
+        view.setSecondDeviceTitle(comparsion.secondDevice.DeviceName)
+        for (prop in Device::class.memberProperties) {
+            val name = prop.name
+            val firstValue = prop.get(comparsion.firstDevice)
+            val secondValue = prop.get(comparsion.secondDevice)
+            if (firstValue != null && secondValue != null) {
+                specifications.add(
+                    Specification(name, firstValue.toString(), secondValue.toString())
+                )
+            }
+        }
+        view.updateRecyclerView()
+    }
+
+    private fun onLatestComparsionReceivingError(t: Throwable) {
+        //TODO toast
+        Log.e(this.javaClass.simpleName, " TEST")
+    }
+
 
 }

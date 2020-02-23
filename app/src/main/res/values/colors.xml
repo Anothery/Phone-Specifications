@@ -3,6 +3,7 @@
     <color name="colorPrimary">#fafafa</color>
     <color name="colorPrimaryDark">#D3D3D3</color>
     <color name="colorPrimaryRipple">#eeeeee</color>
+    <color name="colorPrimaryLight">#e6e6e6</color>
 
     <color name="colorSecondary">#23b5e3</color>
     <color name="colorSecondaryLight">#25c3f5</color>

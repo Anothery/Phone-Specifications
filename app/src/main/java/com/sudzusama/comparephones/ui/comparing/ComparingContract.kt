@@ -1,21 +1,17 @@
 package com.sudzusama.comparephones.ui.comparing
 
-import android.content.Intent
 import com.sudzusama.comparephones.domain.entity.Device
+import com.sudzusama.comparephones.domain.entity.Specification
 
 interface ComparingContract {
     interface View {
-
-        fun setupViewPager(
-            firstDevice: Device,
-            secondDevice: Device,
-            firstDeviceName: String,
-            secondDeviceName: String
-        )
+        fun setFirstDeviceTitle(title: String)
+        fun setSecondDeviceTitle(title: String)
+        fun updateRecyclerView()
     }
 
     interface Presenter {
 
-        fun onCreate(viewIntent: Intent)
+        fun onCreate(specifications: ArrayList<Specification>)
     }
 }

@@ -18,4 +18,5 @@
     <string name="recent_devices">Recent devices</string>
     <string name="no_recent_comparsions_yet">No recent comparsions yet</string>
     <string name="no_recent_devices_yet">No recent devices yet</string>
+    <string name="comparing_activity_label">Comparsion</string>
 </resources>

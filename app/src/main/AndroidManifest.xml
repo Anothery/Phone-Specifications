@@ -18,7 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.comparing.ComparingActivity" />
+        <activity
+                android:name=".ui.comparing.ComparingActivity"
+                android:label="@string/comparing_activity_label" />
         <activity
                 android:name=".ui.adddevice.AddDeviceActivity"
                 android:label="@string/adddevice_label" />

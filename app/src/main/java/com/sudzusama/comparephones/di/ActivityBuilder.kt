@@ -3,7 +3,6 @@ package com.sudzusama.comparephones.di
 import com.sudzusama.comparephones.ui.adddevice.AddDeviceActivity
 import com.sudzusama.comparephones.ui.adddevice.AddDeviceModule
 import com.sudzusama.comparephones.ui.comparing.ComparingActivity
-import com.sudzusama.comparephones.ui.comparing.ComparingFragmentModule
 import com.sudzusama.comparephones.ui.comparing.ComparingModule
 import com.sudzusama.comparephones.ui.start.StartActivity
 import com.sudzusama.comparephones.ui.start.StartFragmentModule
@@ -19,7 +18,7 @@ abstract class ActivityBuilder {
     abstract fun bindAddDeviceActivity(): AddDeviceActivity
 
     @PerActivity
-    @ContributesAndroidInjector(modules = [ComparingModule::class, ComparingFragmentModule::class])
+    @ContributesAndroidInjector(modules = [ComparingModule::class])
     abstract fun bindComparingActivity(): ComparingActivity
 
     @PerActivity
