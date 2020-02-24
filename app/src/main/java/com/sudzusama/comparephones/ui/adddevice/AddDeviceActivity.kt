@@ -35,8 +35,9 @@ class AddDeviceActivity : AppCompatActivity(), AddDeviceContract.View {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_device)
-        setupRecyclerView()
+
         initViews()
+        setupRecyclerView()
         setupToolbar()
         presenter.onCreate(matches)
         presenter.observeFromText(etInsertDevice.textChanges())
@@ -76,13 +77,13 @@ class AddDeviceActivity : AppCompatActivity(), AddDeviceContract.View {
     }
 
     private fun setupRecyclerView() {
-        recyclerView = findViewById(R.id.adddevice_rv)
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = AddDeviceMatchesAdapter(matches) { presenter.onDeviceItemClicked(it) }
         recyclerView.adapter = adapter
     }
 
     private fun initViews() {
+        recyclerView = findViewById(R.id.adddevice_rv)
         etInsertDevice = findViewById(R.id.adddevice_et_insert)
         tvMatchesCount = findViewById(R.id.adddevice_tv_matchescount)
     }

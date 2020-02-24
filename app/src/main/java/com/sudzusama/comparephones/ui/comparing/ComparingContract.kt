@@ -13,5 +13,6 @@ interface ComparingContract {
     interface Presenter {
 
         fun onCreate(specifications: ArrayList<Specification>)
+        fun onCreate(specs: ArrayList<Specification>, id: Int)
     }
 }

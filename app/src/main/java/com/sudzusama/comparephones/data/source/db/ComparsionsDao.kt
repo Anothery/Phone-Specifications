@@ -9,9 +9,15 @@ import io.reactivex.Single
 @Dao
 interface ComparsionsDao {
     @Transaction
-    @Query("SELECT * FROM comparsion ORDER BY comparsionId DESC LIMIT :amount")
+    @Query("SELECT DISTINCT * FROM comparsion ORDER BY comparsionId DESC LIMIT :amount")
     fun getLatestComparsions(amount: Int): Single<List<ComparsionWithDevices>>
+
+    @Transaction
+    @Query("SELECT * FROM comparsion WHERE comparsionId = :id")
+    fun getComparsionById(id: Int): Single<ComparsionWithDevices>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertComparsion(comparsionEntity: ComparsionEntity): Completable
+
+
 }

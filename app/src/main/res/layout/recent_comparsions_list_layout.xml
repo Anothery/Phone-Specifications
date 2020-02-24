@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/main_cv_first_device"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/recent_comparsions_tv_first_device"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto_medium"
+                    android:lines="1"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:scrollHorizontally="true"
+                    android:textAlignment="center"
+                    tools:text="#1 Long device name 12345" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_versus"
+                    android:textSize="14sp" />
+
+            <TextView
+                    android:id="@+id/recent_comparsions_tv_second_device"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto_medium"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:scrollHorizontally="true"
+                    android:textAlignment="center"
+                    tools:text="Device # 2" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

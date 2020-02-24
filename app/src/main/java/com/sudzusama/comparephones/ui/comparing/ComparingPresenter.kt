@@ -4,13 +4,15 @@ import android.util.Log
 import com.sudzusama.comparephones.domain.entity.Comparsion
 import com.sudzusama.comparephones.domain.entity.Device
 import com.sudzusama.comparephones.domain.entity.Specification
+import com.sudzusama.comparephones.domain.usecase.UseCaseGetComparsionById
 import com.sudzusama.comparephones.domain.usecase.UseCaseRecentComparsions
 import javax.inject.Inject
 import kotlin.reflect.full.memberProperties
 
 class ComparingPresenter @Inject constructor(
     val view: ComparingContract.View,
-    private val useCaseRecentComparsions: UseCaseRecentComparsions
+    private val useCaseRecentComparsions: UseCaseRecentComparsions,
+    private val useCaseGetComparsionById: UseCaseGetComparsionById
 ) : ComparingContract.Presenter {
     private lateinit var specifications: ArrayList<Specification>
 
@@ -19,12 +21,30 @@ class ComparingPresenter @Inject constructor(
         getLatestComparsion()
     }
 
+    override fun onCreate(specs: ArrayList<Specification>, id: Int) {
+        specifications = specs
+        getComparsionById(id)
+    }
+
+    private fun getComparsionById(id: Int) {
+        useCaseGetComparsionById.setComparsionId(id)
+        useCaseGetComparsionById.subscribe(
+            this::onComparsionReceived,
+            this::onComparsionReceivingError
+        )
+
+    }
+
     private fun getLatestComparsion() {
         useCaseRecentComparsions.setComparsionAmount(1)
         useCaseRecentComparsions.subscribe(
             this::onLatestComparsionReceived,
-            this::onLatestComparsionReceivingError
+            this::onComparsionReceivingError
         )
+    }
+
+    private fun onComparsionReceived(comparsion: Comparsion) {
+        fillSpecificationsList(comparsion)
     }
 
     private fun onLatestComparsionReceived(list: List<Comparsion>) {
@@ -48,7 +68,7 @@ class ComparingPresenter @Inject constructor(
         view.updateRecyclerView()
     }
 
-    private fun onLatestComparsionReceivingError(t: Throwable) {
+    private fun onComparsionReceivingError(t: Throwable) {
         //TODO toast
         Log.e(this.javaClass.simpleName, " TEST")
     }

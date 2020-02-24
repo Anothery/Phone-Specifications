@@ -41,6 +41,11 @@ class DeviceDataRepository @Inject constructor(
             .insertComparsion(comparsionEntityToDomainMapper.reverseMapToRawEntity(comparsion))
     }
 
+    override fun getComparsionById(id: Int): Single<Comparsion> {
+        return db.comparsionsDao().getComparsionById(id)
+            .map { comparsionEntityToDomainMapper.map(it) }
+    }
+
     private fun addDevices(devices: List<DeviceEntity>) {
         db.devicesDao().insertDevices(devices)
     }

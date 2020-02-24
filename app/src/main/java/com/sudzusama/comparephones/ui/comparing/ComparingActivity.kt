@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sudzusama.comparephones.R
 import com.sudzusama.comparephones.domain.entity.Specification
+import com.sudzusama.comparephones.utils.COMPARSION_ID_EXTRA
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
@@ -30,7 +31,13 @@ class ComparingActivity : AppCompatActivity(), ComparingContract.View {
         setupViews()
         setupRecyclerView()
         setupToolbar()
-        presenter.onCreate(specifications)
+
+        val id = intent.getIntExtra(COMPARSION_ID_EXTRA, 0)
+        if (id != 0) {
+            presenter.onCreate(specifications, id)
+        } else {
+            presenter.onCreate(specifications)
+        }
     }
 
     private fun setupViews() {

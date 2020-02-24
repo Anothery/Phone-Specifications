@@ -45,20 +45,19 @@ class StartActivity : AppCompatActivity(), StartContract.View, HasSupportFragmen
             recentFragment = RecentFragment.newInstance()
         }
 
-
         setupViews()
         setupViewPager()
         setStartFragment()
 
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
         viewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
                 this@StartActivity.onPageSelected(position)
             }
         })
-
-
     }
+
 
     private fun setStartFragment() {
         viewPager.currentItem = 1

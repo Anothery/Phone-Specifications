@@ -36,7 +36,6 @@
             app:cardUseCompatPadding="true"
             app:cardCornerRadius="8dp"
             android:visibility="gone"
-
             tools:visibility="visible">
 
         <LinearLayout
