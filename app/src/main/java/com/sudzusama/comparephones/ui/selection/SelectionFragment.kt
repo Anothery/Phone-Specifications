@@ -3,6 +3,7 @@ package com.sudzusama.comparephones.ui.selection
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,9 +31,9 @@ class SelectionFragment : Fragment(), SelectionContract.View, FragmentLifecycle 
     private lateinit var btnCloseFirstDeviceView: Button
     private lateinit var btnCloseSecondDeviceView: Button
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        retainInstance = true
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        AndroidSupportInjection.inject(this)
     }
 
     override fun onCreateView(
@@ -43,20 +44,26 @@ class SelectionFragment : Fragment(), SelectionContract.View, FragmentLifecycle 
         return inflater.inflate(R.layout.fragment_selection, container, false)
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        AndroidSupportInjection.inject(this)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        retainInstance = true
+        presenter.onAttach(this)
         initViews(view)
+
+        if (savedInstanceState != null) {
+            presenter.updateViewAfterRetain()
+        }
 
         btnChooseFirstDevice.setOnClickListener { presenter.onChooseFirstDeviceButtonClicked() }
         btnChooseSecondDevice.setOnClickListener { presenter.onChooseSecondDeviceButtonClicked() }
         btnCloseFirstDeviceView.setOnClickListener { presenter.onCloseFirstDeviceView() }
         btnCloseSecondDeviceView.setOnClickListener { presenter.onCloseSecondDeviceView() }
         btnCompare.setOnClickListener { presenter.onCompareButtonPressed() }
+    }
+
+    override fun onDestroyView() {
+        presenter.onDetach()
+        super.onDestroyView()
     }
 
     private fun initViews(view: View) {
@@ -77,12 +84,10 @@ class SelectionFragment : Fragment(), SelectionContract.View, FragmentLifecycle 
     }
 
     override fun loadFirstDeviceInfo(deviceName: String) {
-        //TODO Image
         tvFirstDevice.text = deviceName
     }
 
     override fun loadSecondDeviceInfo(deviceName: String) {
-        //TODO Image
         tvSecondDevice.text = deviceName
     }
 
@@ -156,6 +161,7 @@ class SelectionFragment : Fragment(), SelectionContract.View, FragmentLifecycle 
     }
 
     companion object {
+        val TAG = SelectionFragment::class.java.simpleName
         fun newInstance(): SelectionFragment {
             return SelectionFragment()
         }

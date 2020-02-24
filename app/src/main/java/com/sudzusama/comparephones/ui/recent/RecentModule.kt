@@ -1,14 +1,14 @@
 package com.sudzusama.comparephones.ui.recent
 
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 
 @Module
-abstract class RecentModule {
-    @Binds
-    abstract fun provideRecentView(recentFragment: RecentFragment) : RecentContract.View
+class RecentModule {
+    @Provides
+    fun provideRecentView(recentFragment: RecentFragment) : RecentContract.View = recentFragment
 
-    @Binds
-    abstract fun provideRecentPresenter(recentPresenter: RecentPresenter) : RecentContract.Presenter
+    @Provides
+    fun provideRecentPresenter(recentPresenter: RecentPresenter) : RecentContract.Presenter = recentPresenter
 
 }

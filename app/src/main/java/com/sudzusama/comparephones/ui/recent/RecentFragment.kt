@@ -21,6 +21,7 @@ class RecentFragment : Fragment(), RecentContract.View, FragmentLifecycle {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        retainInstance = true
         return inflater.inflate(R.layout.fragment_recent, container, false)
     }
 
@@ -30,12 +31,16 @@ class RecentFragment : Fragment(), RecentContract.View, FragmentLifecycle {
     }
 
     companion object {
-        fun newInstance() = RecentFragment()
+        val TAG: String = RecentFragment::class.java.simpleName
+        fun newInstance(): RecentFragment {
+            return RecentFragment()
+        }
     }
 
     override fun onPauseFragment() {}
 
     //TODO update views on resume
     override fun onResumeFragment() {
-        Log.d(this::class.java.simpleName, "RESUMED")}
+        Log.d(this::class.java.simpleName, "RESUMED")
+    }
 }

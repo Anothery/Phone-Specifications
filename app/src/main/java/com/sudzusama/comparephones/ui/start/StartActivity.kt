@@ -27,94 +27,108 @@ class StartActivity : AppCompatActivity(), StartContract.View, HasSupportFragmen
     lateinit var viewPager: ViewPager
     lateinit var bottomNavigationView: BottomNavigationView
 
+    lateinit var selectionFragment: SelectionFragment
+    lateinit var recentFragment: RecentFragment
     lateinit var selectedMenuItem: MenuItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
-        initViews()
-    }
 
-    private fun initViews() {
-        bottomNavigationView = findViewById(R.id.activity_start_bottom_navigation)
-        viewPager = findViewById(R.id.activity_start_vp)
-
-        setupViewPager()
-
-        viewPager.currentItem = 1
-        bottomNavigationView.selectedItemId = R.id.navigation_item_compare
-        selectedMenuItem = bottomNavigationView.menu.getItem(1)
-
-        bottomNavigationView.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.navigation_item_recent -> {
-                    viewPager.currentItem = 0
-                    return@setOnNavigationItemSelectedListener true
-                }
-                R.id.navigation_item_compare -> {
-                    viewPager.currentItem = 1
-                    return@setOnNavigationItemSelectedListener true
-                }
-            }
-            return@setOnNavigationItemSelectedListener false
+        val fm = supportFragmentManager
+        if (savedInstanceState != null) {
+            recentFragment = fm.findFragmentByTag(getPagerFragmentTag(0)) as RecentFragment
+            selectionFragment = fm.findFragmentByTag(getPagerFragmentTag(1)) as SelectionFragment
+        } else {
+            selectionFragment = SelectionFragment.newInstance()
+            recentFragment = RecentFragment.newInstance()
         }
 
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {
-            }
 
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
+        setupViews()
+        setupViewPager()
+        setStartFragment()
 
-            }
-
+        bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        viewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
-                selectedMenuItem.isChecked = false
-                selectedMenuItem = bottomNavigationView.menu.getItem(position)
-                selectedMenuItem.isChecked = true
-
-
-                val fragment = supportFragmentManager.findFragmentByTag(
-                    "android:switcher:"
-                            + R.id.activity_start_vp
-                            + ":"
-                            + viewPager.currentItem
-                ) as FragmentLifecycle
-                fragment.onResumeFragment()
+                this@StartActivity.onPageSelected(position)
             }
         })
 
+
     }
 
+    private fun setStartFragment() {
+        viewPager.currentItem = 1
+        bottomNavigationView.selectedItemId = R.id.navigation_item_compare
+        selectedMenuItem = bottomNavigationView.menu.getItem(1)
+    }
+
+
+    private fun setupViews() {
+        bottomNavigationView = findViewById(R.id.activity_start_bottom_navigation)
+        viewPager = findViewById(R.id.activity_start_vp)
+    }
+
+    private fun onPageSelected(position: Int) {
+        selectedMenuItem.isChecked = false
+        selectedMenuItem = bottomNavigationView.menu.getItem(position)
+        selectedMenuItem.isChecked = true
+
+        val fragment =
+            supportFragmentManager.findFragmentByTag(getPagerFragmentTag(viewPager.currentItem)) as FragmentLifecycle
+
+        fragment.onResumeFragment()
+    }
+
+    private val onNavigationItemSelectedListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_item_recent -> {
+                    viewPager.currentItem = 0
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.navigation_item_compare -> {
+                    viewPager.currentItem = 1
+                    return@OnNavigationItemSelectedListener true
+                }
+            }
+            false
+        }
+
     private fun setupViewPager() {
-        val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(RecentFragment.newInstance()) // 0
-        adapter.addFragment(SelectionFragment.newInstance()) // 1
+        val adapter = BottomNavigationAdapter(supportFragmentManager)
+        adapter.count = 2
         viewPager.adapter = adapter
-        viewPager.offscreenPageLimit = 1
+        viewPager.offscreenPageLimit = 2
+    }
+
+    private fun getPagerFragmentTag(position: Int): String {
+        return "android:switcher:" + R.id.activity_start_vp + ":" + position
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> = dispatchingAndroidInjector
 
-    internal inner class ViewPagerAdapter(manager: FragmentManager) :
+    inner class BottomNavigationAdapter(manager: FragmentManager) :
         FragmentPagerAdapter(manager) {
-        private val mFragmentList: MutableList<Fragment> = ArrayList()
-
-        override fun getItem(position: Int): Fragment {
-            return mFragmentList[position]
-        }
-
+        private var tabCount = 0
 
         override fun getCount(): Int {
-            return mFragmentList.size
+            return tabCount
         }
 
-        fun addFragment(fragment: Fragment) {
-            mFragmentList.add(fragment)
+        override fun getItem(position: Int): Fragment {
+            return when (position) {
+                0 -> recentFragment
+                1 -> selectionFragment
+                else -> throw IndexOutOfBoundsException()
+            }
+        }
+
+        internal fun setCount(count: Int) {
+            this.tabCount = count
         }
     }
 

@@ -9,11 +9,9 @@ import io.reactivex.subscribers.DisposableSubscriber
 import javax.inject.Inject
 
 class SelectionPresenter @Inject constructor(
-    val view: SelectionContract.View,
     private val useCaseSaveComparsion: UseCaseSaveComparsion
-) :
-    SelectionContract.Presenter {
-
+) : SelectionContract.Presenter {
+    private var view: SelectionContract.View? = null
     private var firstDevice: Device? = null
     private var secondDevice: Device? = null
 
@@ -22,54 +20,77 @@ class SelectionPresenter @Inject constructor(
         device?.let {
             when (requestCode) {
                 1 -> {
-                    view.disableFirstDeviceButton()
-                    view.enableFirstDeviceView()
-                    view.loadFirstDeviceInfo(it.DeviceName)
                     firstDevice = it
+                    loadFirstDevice()
                 }
                 2 -> {
-                    view.disableSecondDeviceButton()
-                    view.enableSecondDeviceView()
-                    view.loadSecondDeviceInfo(it.DeviceName)
                     secondDevice = it
+                    loadSecondDevice()
                 }
             }
 
-            if (firstDevice != null && secondDevice != null) {
-                view.enableCompareButton()
-            }
+            firstDevice?.let { secondDevice?.let { view?.enableCompareButton() } }
+        }
+    }
+
+    override fun updateViewAfterRetain() {
+        loadFirstDevice()
+        loadSecondDevice()
+    }
+
+    override fun onAttach(view: SelectionContract.View) {
+        this.view = view
+    }
+
+    override fun onDetach() {
+        this.view = null
+    }
+
+    private fun loadFirstDevice() {
+        firstDevice?.let {
+            view?.disableFirstDeviceButton()
+            view?.enableFirstDeviceView()
+            view?.loadFirstDeviceInfo(it.DeviceName)
+        }
+    }
+
+    private fun loadSecondDevice() {
+        secondDevice?.let {
+            view?.disableSecondDeviceButton()
+            view?.enableSecondDeviceView()
+            view?.loadSecondDeviceInfo(it.DeviceName)
         }
     }
 
     override fun onCloseFirstDeviceView() {
         firstDevice = null
-        view.disableFirstDeviceView()
-        view.disableCompareButton()
-        view.enableFirstDeviceButton()
+        view?.disableFirstDeviceView()
+        view?.disableCompareButton()
+        view?.enableFirstDeviceButton()
     }
 
     override fun onCloseSecondDeviceView() {
         secondDevice = null
-        view.disableSecondDeviceView()
-        view.disableCompareButton()
-        view.enableSecondDeviceButton()
+        view?.disableSecondDeviceView()
+        view?.disableCompareButton()
+        view?.enableSecondDeviceButton()
     }
 
     override fun onChooseFirstDeviceButtonClicked() {
-        view.disableButtons()
-        view.startAddDeviceActivity(1)
+        view?.disableButtons()
+        view?.startAddDeviceActivity(1)
     }
 
     override fun onChooseSecondDeviceButtonClicked() {
-        view.disableButtons()
-        view.startAddDeviceActivity(2)
+        view?.disableButtons()
+        view?.startAddDeviceActivity(2)
     }
 
     override fun onCompareButtonPressed() {
         val fDevice = firstDevice
         val sDevice = secondDevice
         if (fDevice != null && sDevice != null) {
-            view.disableButtons()
+            view?.disableButtons()
             useCaseSaveComparsion.createComparsion(fDevice, sDevice)
             useCaseSaveComparsion.subscribe(UseCaseSaveComparsionSubscriber())
 
@@ -79,7 +100,7 @@ class SelectionPresenter @Inject constructor(
     }
 
     private fun onComparsionSaveSuccess() {
-        view.startComparingActivity()
+        view?.startComparingActivity()
     }
 
     private fun onComparsionSaveError() {
@@ -88,7 +109,7 @@ class SelectionPresenter @Inject constructor(
 
 
     override fun onResume() {
-        view.enableButtons()
+        view?.enableButtons()
     }
 
     internal inner class UseCaseSaveComparsionSubscriber : DisposableSubscriber<Comparsion>() {

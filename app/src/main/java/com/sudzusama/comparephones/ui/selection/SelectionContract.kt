@@ -30,6 +30,10 @@ interface SelectionContract {
         fun onChooseFirstDeviceButtonClicked()
         fun onChooseSecondDeviceButtonClicked()
         fun onResume()
+        fun updateViewAfterRetain()
+        fun onAttach(view : View)
+        fun onDetach()
+
     }
 
 }

@@ -9,17 +9,14 @@ import dagger.Provides
 
 @Module
 class AddDeviceModule {
-    @PerActivity
     @Provides
     fun provideView(addDeviceActivity: AddDeviceActivity): AddDeviceContract.View =
         addDeviceActivity
 
-    @PerActivity
     @Provides
     fun bindPresenter(addDevicePresenter: AddDevicePresenter): AddDeviceContract.Presenter =
         addDevicePresenter
 
-    @PerActivity
     @Provides
     fun provideGetDevicesByNameUseCase(repository: DeviceRepository) =
         UseCaseDevices(repository)

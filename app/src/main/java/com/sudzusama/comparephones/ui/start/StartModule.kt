@@ -1,17 +1,19 @@
 package com.sudzusama.comparephones.ui.start
 
 import com.sudzusama.comparephones.di.PerActivity
-import dagger.Binds
+import com.sudzusama.comparephones.ui.selection.SelectionFragment
+import com.sudzusama.comparephones.ui.selection.SelectionPresenter
 import dagger.Module
+import dagger.Provides
 
 @Module
-abstract class StartModule {
+class StartModule {
     @PerActivity
-    @Binds
-    abstract fun bindView(startActivity: StartActivity): StartContract.View
+    @Provides
+    fun bindView(startActivity: StartActivity): StartContract.View = startActivity
 
     @PerActivity
-    @Binds
-    abstract fun bindPresenter(startPresenter: StartPresenter): StartContract.Presenter
+    @Provides
+    fun bindPresenter(startPresenter: StartPresenter): StartContract.Presenter = startPresenter
 
 }

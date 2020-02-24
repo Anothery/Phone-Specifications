@@ -11,7 +11,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class ActivityBuilder {
+abstract class ActivityBindingModule {
 
     @PerActivity
     @ContributesAndroidInjector(modules = [AddDeviceModule::class])
