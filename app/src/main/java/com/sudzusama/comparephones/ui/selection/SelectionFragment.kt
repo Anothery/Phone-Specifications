@@ -122,7 +122,6 @@ class SelectionFragment : Fragment(), SelectionContract.View, FragmentLifecycle 
     }
 
     override fun disableFirstDeviceButton() {
-        AnimationUtils.setDisappearAnimation(btnChooseFirstDevice, DURATION_1_SECOND)
         btnChooseFirstDevice.visibility = View.GONE
     }
 
@@ -132,7 +131,6 @@ class SelectionFragment : Fragment(), SelectionContract.View, FragmentLifecycle 
     }
 
     override fun disableSecondDeviceButton() {
-        AnimationUtils.setDisappearAnimation(btnChooseSecondDevice, DURATION_1_SECOND)
         btnChooseSecondDevice.visibility = View.GONE
     }
 
@@ -158,12 +156,10 @@ class SelectionFragment : Fragment(), SelectionContract.View, FragmentLifecycle 
     }
 
     override fun enableCompareButton() {
-        AnimationUtils.setAppearAnimation(btnCompare, DURATION_1_SECOND)
         btnCompare.visibility = View.VISIBLE
     }
 
     override fun disableCompareButton() {
-        AnimationUtils.setDisappearAnimation(btnCompare, DURATION_1_SECOND)
         btnCompare.visibility = View.GONE
     }
 

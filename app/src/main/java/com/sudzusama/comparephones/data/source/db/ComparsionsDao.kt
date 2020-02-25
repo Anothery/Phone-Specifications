@@ -9,7 +9,7 @@ import io.reactivex.Single
 @Dao
 interface ComparsionsDao {
     @Transaction
-    @Query("SELECT DISTINCT * FROM comparsion ORDER BY comparsionId DESC LIMIT :amount")
+    @Query("SELECT max(comparsionId) as comparsionId, firstDeviceName, secondDeviceName FROM comparsion GROUP BY firstDeviceName, secondDeviceName ORDER BY comparsionId DESC LIMIT :amount")
     fun getLatestComparsions(amount: Int): Single<List<ComparsionWithDevices>>
 
     @Transaction
