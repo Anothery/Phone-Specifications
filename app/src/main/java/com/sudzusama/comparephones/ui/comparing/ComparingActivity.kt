@@ -48,7 +48,7 @@ class ComparingActivity : AppCompatActivity(), ComparingContract.View {
     private fun setupRecyclerView() {
         recyclerView = findViewById(R.id.activity_comparing_rv)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = ComparingListAdapter(specifications)
+        adapter = ComparingListAdapter(specifications, this)
         recyclerView.adapter = adapter
     }
 

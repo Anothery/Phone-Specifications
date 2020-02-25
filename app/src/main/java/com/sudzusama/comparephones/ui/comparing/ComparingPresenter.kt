@@ -2,12 +2,11 @@ package com.sudzusama.comparephones.ui.comparing
 
 import android.util.Log
 import com.sudzusama.comparephones.domain.entity.Comparsion
-import com.sudzusama.comparephones.domain.entity.Device
 import com.sudzusama.comparephones.domain.entity.Specification
 import com.sudzusama.comparephones.domain.usecase.UseCaseGetComparsionById
 import com.sudzusama.comparephones.domain.usecase.UseCaseRecentComparsions
+import com.sudzusama.comparephones.utils.SpecificationFormatterUtils
 import javax.inject.Inject
-import kotlin.reflect.full.memberProperties
 
 class ComparingPresenter @Inject constructor(
     val view: ComparingContract.View,
@@ -52,25 +51,20 @@ class ComparingPresenter @Inject constructor(
         fillSpecificationsList(latestComparsion)
     }
 
-    private fun fillSpecificationsList(comparsion: Comparsion) {
-        view.setFirstDeviceTitle(comparsion.firstDevice.DeviceName)
-        view.setSecondDeviceTitle(comparsion.secondDevice.DeviceName)
-        for (prop in Device::class.memberProperties) {
-            val name = prop.name
-            val firstValue = prop.get(comparsion.firstDevice)
-            val secondValue = prop.get(comparsion.secondDevice)
-            if (firstValue != null && secondValue != null) {
-                specifications.add(
-                    Specification(name, firstValue.toString(), secondValue.toString())
-                )
-            }
-        }
+    private fun fillSpecificationsList(comp: Comparsion) {
+        view.setFirstDeviceTitle(comp.firstDevice.DeviceName)
+        view.setSecondDeviceTitle(comp.secondDevice.DeviceName)
+
+        val specs =
+            SpecificationFormatterUtils.formatSpecifications(comp.firstDevice, comp.secondDevice)
+
+        specifications.addAll(specs)
         view.updateRecyclerView()
     }
 
     private fun onComparsionReceivingError(t: Throwable) {
         //TODO toast
-        Log.e(this.javaClass.simpleName, " TEST")
+        Log.e(this.javaClass.simpleName, t.message)
     }
 
 

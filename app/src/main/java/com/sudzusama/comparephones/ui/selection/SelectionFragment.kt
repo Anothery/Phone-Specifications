@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment
 import com.sudzusama.comparephones.R
 import com.sudzusama.comparephones.ui.adddevice.AddDeviceActivity
 import com.sudzusama.comparephones.ui.comparing.ComparingActivity
+import com.sudzusama.comparephones.utils.AnimationUtils
+import com.sudzusama.comparephones.utils.DURATION_1_SECOND
 import com.sudzusama.comparephones.utils.FragmentLifecycle
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
@@ -120,18 +122,22 @@ class SelectionFragment : Fragment(), SelectionContract.View, FragmentLifecycle 
     }
 
     override fun disableFirstDeviceButton() {
+        AnimationUtils.setDisappearAnimation(btnChooseFirstDevice, DURATION_1_SECOND)
         btnChooseFirstDevice.visibility = View.GONE
     }
 
     override fun enableFirstDeviceButton() {
+        AnimationUtils.setAppearAnimation(btnChooseFirstDevice, DURATION_1_SECOND)
         btnChooseFirstDevice.visibility = View.VISIBLE
     }
 
     override fun disableSecondDeviceButton() {
+        AnimationUtils.setDisappearAnimation(btnChooseSecondDevice, DURATION_1_SECOND)
         btnChooseSecondDevice.visibility = View.GONE
     }
 
     override fun enableSecondDeviceButton() {
+        AnimationUtils.setAppearAnimation(btnChooseSecondDevice, DURATION_1_SECOND)
         btnChooseSecondDevice.visibility = View.VISIBLE
     }
 
@@ -152,10 +158,12 @@ class SelectionFragment : Fragment(), SelectionContract.View, FragmentLifecycle 
     }
 
     override fun enableCompareButton() {
+        AnimationUtils.setAppearAnimation(btnCompare, DURATION_1_SECOND)
         btnCompare.visibility = View.VISIBLE
     }
 
     override fun disableCompareButton() {
+        AnimationUtils.setDisappearAnimation(btnCompare, DURATION_1_SECOND)
         btnCompare.visibility = View.GONE
     }
 

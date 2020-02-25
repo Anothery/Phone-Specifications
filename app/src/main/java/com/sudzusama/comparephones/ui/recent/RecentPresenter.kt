@@ -20,7 +20,6 @@ class RecentPresenter @Inject constructor(
         recentComparsions = comparsions
         recentDevices = devices
         getRecentComparsions()
-
     }
 
     private fun getRecentComparsions() {

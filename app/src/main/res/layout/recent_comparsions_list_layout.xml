@@ -9,7 +9,8 @@
     <androidx.cardview.widget.CardView
             android:id="@+id/main_cv_first_device"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="65dp"
+            android:background="@color/colorWhite"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="8dp"
             app:cardElevation="1dp"
@@ -34,20 +35,21 @@
                     android:paddingEnd="8dp"
                     android:scrollHorizontally="true"
                     android:textAlignment="center"
+                    android:textSize="@dimen/text_size_medium"
                     tools:text="#1 Long device name 12345" />
 
-            <TextView
-                    android:layout_width="wrap_content"
+            <ImageView
+                    android:layout_width="30dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/label_versus"
-                    android:textSize="14sp" />
+                    app:srcCompat="@drawable/baseline_compare_arrows_24">
+
+            </ImageView>
 
             <TextView
                     android:id="@+id/recent_comparsions_tv_second_device"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-
                     android:ellipsize="end"
                     android:fontFamily="@font/roboto_medium"
                     android:gravity="center"
@@ -56,6 +58,7 @@
                     android:paddingEnd="8dp"
                     android:scrollHorizontally="true"
                     android:textAlignment="center"
+                    android:textSize="@dimen/text_size_medium"
                     tools:text="Device # 2" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

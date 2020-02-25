@@ -17,7 +17,7 @@
             android:paddingBottom="36dp"
             android:text="@string/main_compare_two_devices"
             android:textAlignment="center"
-            android:textSize="20sp" />
+            android:textSize="@dimen/text_size_title" />
 
     <Button
             android:id="@+id/main_btn_choosedevice"
@@ -55,6 +55,7 @@
                     android:id="@+id/main_tv_firstdevice"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_medium"
                     android:layout_weight="1"
                     android:padding="10dp"
                     android:textAlignment="center" />
@@ -114,6 +115,7 @@
                     android:id="@+id/main_tv_seconddevice"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_medium"
                     android:layout_weight="1"
                     android:padding="10dp"
                     android:textAlignment="center" />

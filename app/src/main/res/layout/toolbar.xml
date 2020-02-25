@@ -2,28 +2,26 @@
 
 
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:background="?selectableItemBackgroundBorderless"
-        app:theme="@style/Toolbar">
+        android:textColorPrimary="@color/textColorPrimary">
 
     <EditText
             android:id="@+id/adddevice_et_insert"
-            style="@style/Toolbar.EditText"
-            android:layout_width="220dp"
+            android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginTop="8dp"
             android:background="@null"
-            android:ems="10"
             android:hint="@string/activity_add_insert_device_name"
             android:inputType="text"
             android:maxLines="1"
             android:textColor="@color/textColorPrimary"
             android:textColorHint="@color/textColorPrimaryLight"
+            android:textSize="@dimen/text_size_medium"
             android:visibility="gone"
             tools:visibility="visible" />
 </androidx.appcompat.widget.Toolbar>

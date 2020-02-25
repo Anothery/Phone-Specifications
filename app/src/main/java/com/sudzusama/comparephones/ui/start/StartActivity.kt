@@ -1,7 +1,9 @@
 package com.sudzusama.comparephones.ui.start
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -41,8 +43,8 @@ class StartActivity : AppCompatActivity(), StartContract.View, HasSupportFragmen
             recentFragment = fm.findFragmentByTag(getPagerFragmentTag(0)) as RecentFragment
             selectionFragment = fm.findFragmentByTag(getPagerFragmentTag(1)) as SelectionFragment
         } else {
-            selectionFragment = SelectionFragment.newInstance()
             recentFragment = RecentFragment.newInstance()
+            selectionFragment = SelectionFragment.newInstance()
         }
 
         setupViews()
@@ -93,6 +95,11 @@ class StartActivity : AppCompatActivity(), StartContract.View, HasSupportFragmen
                     viewPager.currentItem = 1
                     return@OnNavigationItemSelectedListener true
                 }
+                R.id.navigation_item_devices -> {
+                    val toast = Toast.makeText(this, "Currently in development", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.BOTTOM, 0, 250)
+                    toast.show()
+                }
             }
             false
         }
@@ -111,7 +118,7 @@ class StartActivity : AppCompatActivity(), StartContract.View, HasSupportFragmen
     override fun supportFragmentInjector(): AndroidInjector<Fragment> = dispatchingAndroidInjector
 
     inner class BottomNavigationAdapter(manager: FragmentManager) :
-        FragmentPagerAdapter(manager) {
+        FragmentPagerAdapter(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         private var tabCount = 0
 
         override fun getCount(): Int {
@@ -126,7 +133,7 @@ class StartActivity : AppCompatActivity(), StartContract.View, HasSupportFragmen
             }
         }
 
-        internal fun setCount(count: Int) {
+        fun setCount(count: Int) {
             this.tabCount = count
         }
     }
