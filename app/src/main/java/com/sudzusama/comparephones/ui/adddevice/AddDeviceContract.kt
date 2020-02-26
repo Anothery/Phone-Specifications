@@ -1,6 +1,7 @@
 package com.sudzusama.comparephones.ui.adddevice
 
 import com.sudzusama.comparephones.domain.entity.Device
+import com.sudzusama.comparephones.ui.base.MVPPresenter
 import io.reactivex.Observable
 import java.util.*
 
@@ -13,7 +14,7 @@ interface AddDeviceContract {
         fun finishActivity(deviceName: String)
     }
 
-    interface Presenter {
+    interface Presenter : MVPPresenter<View>{
         fun onCreate(matches : ArrayList<Device>)
         fun observeFromText(observable: Observable<CharSequence>)
         fun onDeviceItemClicked(device : Device)

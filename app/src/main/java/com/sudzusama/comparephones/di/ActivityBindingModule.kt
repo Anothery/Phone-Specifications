@@ -13,15 +13,15 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class ActivityBindingModule {
 
-    @PerActivity
+    @ActivityScope
     @ContributesAndroidInjector(modules = [AddDeviceModule::class])
     abstract fun bindAddDeviceActivity(): AddDeviceActivity
 
-    @PerActivity
+    @ActivityScope
     @ContributesAndroidInjector(modules = [ComparingModule::class])
     abstract fun bindComparingActivity(): ComparingActivity
 
-    @PerActivity
+    @ActivityScope
     @ContributesAndroidInjector(modules = [StartModule::class, StartFragmentModule::class])
     abstract fun bindStartActivity(): StartActivity
 }

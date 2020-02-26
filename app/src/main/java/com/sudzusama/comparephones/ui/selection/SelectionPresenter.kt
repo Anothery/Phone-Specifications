@@ -1,6 +1,7 @@
 package com.sudzusama.comparephones.ui.selection
 
 import android.content.Intent
+import android.util.Log
 import com.sudzusama.comparephones.domain.entity.Comparsion
 import com.sudzusama.comparephones.domain.usecase.UseCaseSaveComparsion
 import com.sudzusama.comparephones.utils.DEVICE_NAME_EXTRA
@@ -11,49 +12,60 @@ class SelectionPresenter @Inject constructor(
     private val useCaseSaveComparsion: UseCaseSaveComparsion
 ) : SelectionContract.Presenter {
     private var view: SelectionContract.View? = null
+
     private var firstDeviceName: String? = null
     private var secondDeviceName: String? = null
 
+
     override fun onViewResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        data?.let { data ->
-            val deviceName = data.getStringExtra(DEVICE_NAME_EXTRA)
+        data?.let { intent ->
+            val deviceName = intent.getStringExtra(DEVICE_NAME_EXTRA)
 
             deviceName?.let {
                 when (requestCode) {
                     1 -> {
                         firstDeviceName = it
-                        loadFirstDevice()
+                        loadFirstDevice(it)
                     }
                     2 -> {
                         secondDeviceName = it
-                        loadSecondDevice()
+                        loadSecondDevice(it)
                     }
-                }
-
-                if (firstDeviceName != null && secondDeviceName != null) {
-                    view?.enableCompareButton()
                 }
             }
         }
+
+        if (firstDeviceName != null && secondDeviceName != null) {
+            view?.enableCompareButton()
+        }
     }
 
-    override fun updateViewAfterRetain() {
-        loadFirstDevice()
-        loadSecondDevice()
+
+    override fun onViewRetained() {
+        firstDeviceName?.let { loadFirstDevice(it) }
+        secondDeviceName?.let { loadSecondDevice(it) }
     }
 
+    override fun onAttach(view: SelectionContract.View) {
+        this.view = view
+    }
 
-    private fun loadFirstDevice() {
+    override fun onDetach() {
+        view = null
+        useCaseSaveComparsion.dispose()
+    }
+
+    private fun loadFirstDevice(fDevName: String) {
         view?.disableFirstDeviceButton()
         view?.enableFirstDeviceView()
-        view?.loadFirstDeviceInfo(firstDeviceName!!)
+        view?.loadFirstDeviceInfo(fDevName)
     }
 
 
-    private fun loadSecondDevice() {
+    private fun loadSecondDevice(sDevName: String) {
         view?.disableSecondDeviceButton()
         view?.enableSecondDeviceView()
-        view?.loadSecondDeviceInfo(secondDeviceName!!)
+        view?.loadSecondDeviceInfo(sDevName)
     }
 
     override fun onCloseFirstDeviceView() {
@@ -80,16 +92,28 @@ class SelectionPresenter @Inject constructor(
         view?.startAddDeviceActivity(2)
     }
 
+    override fun onViewResumed() {
+        view?.enableButtons()
+    }
+
     override fun onCompareButtonPressed() {
         val fDevice = firstDeviceName
         val sDevice = secondDeviceName
+
         if (fDevice != null && sDevice != null) {
             view?.disableButtons()
             useCaseSaveComparsion.setComparsion(fDevice, sDevice)
-            useCaseSaveComparsion.subscribe(UseCaseSaveComparsionSubscriber())
+            useCaseSaveComparsion.subscribe(object : DisposableSubscriber<Comparsion>() {
+                override fun onComplete() {
+                    onComparsionSaveSuccess()
+                }
 
-        } else {
-            //TODO onCompareButtonPressed error toast
+                override fun onNext(t: Comparsion?) {}
+
+                override fun onError(t: Throwable) {
+                    onComparsionSaveError(t)
+                }
+            })
         }
     }
 
@@ -97,33 +121,9 @@ class SelectionPresenter @Inject constructor(
         view?.startComparingActivity()
     }
 
-    private fun onComparsionSaveError() {
-        //TODO
+    private fun onComparsionSaveError(t: Throwable) {
+        Log.e(this::class.java.simpleName, t.message)
     }
 
-    override fun onAttach(view: SelectionContract.View) {
-        this.view = view
-    }
-
-    override fun onDetach() {
-        this.view = null
-    }
-
-    override fun onResume() {
-        view?.enableButtons()
-    }
-
-    internal inner class UseCaseSaveComparsionSubscriber : DisposableSubscriber<Comparsion>() {
-        override fun onComplete() {
-            onComparsionSaveSuccess()
-        }
-
-        override fun onNext(t: Comparsion?) {}
-
-        override fun onError(t: Throwable?) {
-            onComparsionSaveError()
-        }
-
-    }
 
 }

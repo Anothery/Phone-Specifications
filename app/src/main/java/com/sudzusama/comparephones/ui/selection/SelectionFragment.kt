@@ -32,9 +32,12 @@ class SelectionFragment : Fragment(), SelectionContract.View, FragmentLifecycle 
     private lateinit var btnCloseFirstDeviceView: Button
     private lateinit var btnCloseSecondDeviceView: Button
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
         AndroidSupportInjection.inject(this)
+
     }
 
     override fun onCreateView(
@@ -47,12 +50,12 @@ class SelectionFragment : Fragment(), SelectionContract.View, FragmentLifecycle 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        retainInstance = true
+
         presenter.onAttach(this)
         initViews(view)
 
         if (savedInstanceState != null) {
-            presenter.updateViewAfterRetain()
+            presenter.onViewRetained()
         }
 
         btnChooseFirstDevice.setOnClickListener { presenter.onChooseFirstDeviceButtonClicked() }
@@ -108,7 +111,7 @@ class SelectionFragment : Fragment(), SelectionContract.View, FragmentLifecycle 
 
     override fun onResume() {
         super.onResume()
-        presenter.onResume()
+        presenter.onViewResumed()
     }
 
     override fun startComparingActivity() {

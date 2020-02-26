@@ -5,13 +5,11 @@ import android.view.Gravity
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.TooltipCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.google.android.material.bottomnavigation.BottomNavigationMenu
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sudzusama.comparephones.R
 import com.sudzusama.comparephones.ui.recent.RecentFragment
@@ -25,9 +23,10 @@ import javax.inject.Inject
 
 class StartActivity : AppCompatActivity(), StartContract.View, HasSupportFragmentInjector {
     @Inject
-    lateinit var presenter: StartPresenter
-    @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+
+    @Inject
+    lateinit var presenter: StartContract.Presenter
 
     lateinit var viewPager: ViewPager
     lateinit var bottomNavigationView: BottomNavigationView
@@ -41,7 +40,10 @@ class StartActivity : AppCompatActivity(), StartContract.View, HasSupportFragmen
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
 
+        presenter.onAttach(this)
+
         val fm = supportFragmentManager
+
         if (savedInstanceState != null) {
             recentFragment = fm.findFragmentByTag(getPagerFragmentTag(0)) as RecentFragment
             selectionFragment = fm.findFragmentByTag(getPagerFragmentTag(1)) as SelectionFragment
@@ -61,6 +63,11 @@ class StartActivity : AppCompatActivity(), StartContract.View, HasSupportFragmen
                 this@StartActivity.onPageSelected(position)
             }
         })
+    }
+
+    override fun onDestroy() {
+        presenter.onDetach()
+        super.onDestroy()
     }
 
     private fun setStartFragment() {

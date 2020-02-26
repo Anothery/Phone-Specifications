@@ -1,6 +1,7 @@
 package com.sudzusama.comparephones.ui.selection
 
 import android.content.Intent
+import com.sudzusama.comparephones.ui.base.MVPPresenter
 
 interface SelectionContract {
     interface View {
@@ -22,18 +23,15 @@ interface SelectionContract {
         fun disableButtons()
     }
 
-    interface Presenter {
+    interface Presenter : MVPPresenter<View> {
         fun onViewResult(requestCode: Int, resultCode: Int, data: Intent?)
         fun onCloseFirstDeviceView()
         fun onCloseSecondDeviceView()
         fun onCompareButtonPressed()
         fun onChooseFirstDeviceButtonClicked()
         fun onChooseSecondDeviceButtonClicked()
-        fun onResume()
-        fun updateViewAfterRetain()
-        fun onAttach(view : View)
-        fun onDetach()
-
+        fun onViewRetained()
+        fun onViewResumed()
     }
 
 }

@@ -4,8 +4,8 @@ import javax.inject.Scope
 
 @Scope
 @Retention(value = AnnotationRetention.RUNTIME)
-annotation class PerActivity
+annotation class ActivityScope
 
 @Scope
 @Retention(value = AnnotationRetention.RUNTIME)
-annotation class  PerFragment
+annotation class  FragmentScope

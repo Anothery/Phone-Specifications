@@ -7,10 +7,12 @@ import com.sudzusama.comparephones.domain.usecase.UseCaseRecentComparsions
 import javax.inject.Inject
 
 class RecentPresenter @Inject constructor(
-    private val view: RecentContract.View,
-    private val recentComparsionsUseCase: UseCaseRecentComparsions
+    private val useCaseRecentComparsions: UseCaseRecentComparsions
 ) :
     RecentContract.Presenter {
+
+    private var view: RecentContract.View? = null
+
     private val RECENT_COMPARSIONS_AMOUNT = 3
 
     private lateinit var recentComparsions: ArrayList<Comparsion>
@@ -23,8 +25,8 @@ class RecentPresenter @Inject constructor(
     }
 
     private fun getRecentComparsions() {
-        recentComparsionsUseCase.setComparsionAmount(RECENT_COMPARSIONS_AMOUNT)
-        recentComparsionsUseCase.subscribe(
+        useCaseRecentComparsions.setComparsionAmount(RECENT_COMPARSIONS_AMOUNT)
+        useCaseRecentComparsions.subscribe(
             this::onRecentComparsionsListArrived,
             this::onRecentComparsionsListArrivingError
         )
@@ -34,10 +36,10 @@ class RecentPresenter @Inject constructor(
         recentComparsions.clear()
         recentComparsions.addAll(list)
         if (list.isNotEmpty()) {
-            view.showRecentComparsionsList()
-            view.updateRecentComparsionsList()
+            view?.showRecentComparsionsList()
+            view?.updateRecentComparsionsList()
         } else {
-            view.hideRecentComparsionsList()
+            view?.hideRecentComparsionsList()
         }
     }
 
@@ -46,10 +48,19 @@ class RecentPresenter @Inject constructor(
     }
 
     override fun onRecentComparsionsItemClicked(comparsion: Comparsion) {
-        view.startComparingActivity(comparsion.comparsionId)
+        view?.startComparingActivity(comparsion.comparsionId)
     }
 
     override fun onViewResumed() {
         getRecentComparsions()
+    }
+
+    override fun onAttach(view: RecentContract.View) {
+        this.view = view
+    }
+
+    override fun onDetach() {
+        view = null
+        useCaseRecentComparsions.dispose()
     }
 }

@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 class RecentFragment : Fragment(), RecentContract.View, FragmentLifecycle {
     @Inject
-    lateinit var presenter: RecentPresenter
+    lateinit var presenter: RecentContract.Presenter
 
     lateinit var rvRecentComparsions: RecyclerView
     lateinit var rvRecentDevices: RecyclerView
@@ -46,7 +46,13 @@ class RecentFragment : Fragment(), RecentContract.View, FragmentLifecycle {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
         setupRvRecentComparsions()
+        presenter.onAttach(this)
         presenter.onViewCreated(recentComparsions, recentDevices)
+    }
+
+    override fun onDestroyView() {
+        presenter.onDetach()
+        super.onDestroyView()
     }
 
     private fun setupViews() {
@@ -66,7 +72,7 @@ class RecentFragment : Fragment(), RecentContract.View, FragmentLifecycle {
     }
 
     private fun setupRvRecentDevices() {
-
+        //todo
     }
 
     override fun startComparingActivity(id: Int) {

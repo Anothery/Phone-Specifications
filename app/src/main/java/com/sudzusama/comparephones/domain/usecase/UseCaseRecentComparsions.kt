@@ -3,11 +3,16 @@ package com.sudzusama.comparephones.domain.usecase
 import com.sudzusama.comparephones.domain.entity.Comparsion
 import com.sudzusama.comparephones.domain.repository.DeviceRepository
 import io.reactivex.Flowable
+import io.reactivex.Scheduler
 import javax.inject.Inject
 
 
-class UseCaseRecentComparsions @Inject constructor(private val repository: DeviceRepository) :
-    UseCase<List<Comparsion>>() {
+class UseCaseRecentComparsions @Inject constructor(
+    private val repository: DeviceRepository,
+    subscribeScheduler: Scheduler,
+    postExecutionScheduler: Scheduler
+) :
+    UseCase<List<Comparsion>>(subscribeScheduler, postExecutionScheduler) {
     private var comparsionAmount = 1
 
     fun setComparsionAmount(amount: Int) {

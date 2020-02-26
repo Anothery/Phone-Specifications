@@ -9,20 +9,32 @@ import com.sudzusama.comparephones.utils.SpecificationFormatterUtils
 import javax.inject.Inject
 
 class ComparingPresenter @Inject constructor(
-    val view: ComparingContract.View,
     private val useCaseRecentComparsions: UseCaseRecentComparsions,
     private val useCaseGetComparsionById: UseCaseGetComparsionById
-    ) : ComparingContract.Presenter {
+) : ComparingContract.Presenter {
+
+    private var view: ComparingContract.View? = null
+
     private lateinit var specifications: ArrayList<Specification>
 
-    override fun onCreate(specs: ArrayList<Specification>) {
-        specifications = specs
+    override fun onCreate(specifications: ArrayList<Specification>) {
+        this.specifications = specifications
         getLatestComparsion()
     }
 
     override fun onCreate(specs: ArrayList<Specification>, id: Int) {
         specifications = specs
         getComparsionById(id)
+    }
+
+    override fun onAttach(view: ComparingContract.View) {
+        this.view = view
+    }
+
+    override fun onDetach() {
+        view = null
+        useCaseRecentComparsions.dispose()
+        useCaseGetComparsionById.dispose()
     }
 
     private fun getComparsionById(id: Int) {
@@ -55,14 +67,14 @@ class ComparingPresenter @Inject constructor(
     }
 
     private fun fillSpecificationsList(comp: Comparsion) {
-        view.setFirstDeviceTitle(comp.firstDevice.DeviceName)
-        view.setSecondDeviceTitle(comp.secondDevice.DeviceName)
+        view?.setFirstDeviceTitle(comp.firstDevice.DeviceName)
+        view?.setSecondDeviceTitle(comp.secondDevice.DeviceName)
 
         val specs =
             SpecificationFormatterUtils.formatSpecifications(comp.firstDevice, comp.secondDevice)
 
         specifications.addAll(specs)
-        view.updateRecyclerView()
+        view?.updateRecyclerView()
     }
 
     private fun onComparsionReceivingError(t: Throwable) {

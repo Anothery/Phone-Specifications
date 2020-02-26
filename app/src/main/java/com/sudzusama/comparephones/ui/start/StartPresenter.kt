@@ -1,6 +1,13 @@
 package com.sudzusama.comparephones.ui.start
 
-import javax.inject.Inject
+class StartPresenter : StartContract.Presenter {
+    private var view: StartContract.View? = null
 
-class StartPresenter @Inject constructor(val view: StartContract.View) : StartContract.Presenter {
+    override fun onAttach(view: StartContract.View) {
+        this.view = view
+    }
+
+    override fun onDetach() {
+        view = null
+    }
 }

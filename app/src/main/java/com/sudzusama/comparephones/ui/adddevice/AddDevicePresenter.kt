@@ -3,7 +3,6 @@ package com.sudzusama.comparephones.ui.adddevice
 import android.util.Log
 import com.sudzusama.comparephones.domain.entity.Device
 import com.sudzusama.comparephones.domain.usecase.UseCaseDevices
-import com.sudzusama.comparephones.domain.usecase.UseCaseSaveComparsion
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -12,9 +11,10 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class AddDevicePresenter @Inject constructor(
-    val view: AddDeviceContract.View,
     private val useCaseDevices: UseCaseDevices
 ) : AddDeviceContract.Presenter {
+
+    private var view: AddDeviceContract.View? = null
 
     private lateinit var matches: ArrayList<Device>
     private val disposable = CompositeDisposable()
@@ -43,7 +43,7 @@ class AddDevicePresenter @Inject constructor(
 
     private fun onTextArrived(char: CharSequence) {
         val text = char.toString()
-        view.enableMatchesCount()
+        view?.enableMatchesCount()
         if (text.isNotEmpty()) {
             useCaseDevices.searchDeviceByName(text)
             useCaseDevices.subscribe(this::onDeviceListArrived, this::onDeviceListError)
@@ -68,21 +68,29 @@ class AddDevicePresenter @Inject constructor(
         Log.e(TAG, t.message)
         matches.clear()
         updateMatchesList()
-
     }
 
     private fun updateMatchesList() {
-        view.setMatchesCount(matches.size)
-        view.updateRecyclerView()
+        view?.setMatchesCount(matches.size)
+        view?.updateRecyclerView()
     }
 
     override fun onDeviceItemClicked(device: Device) {
-        view.disableMatchesCount()
+        view?.disableMatchesCount()
         matches.clear()
-        view.finishActivity(device.DeviceName)
+        view?.finishActivity(device.DeviceName)
     }
 
     override fun onDestroy() {
+        useCaseDevices.dispose()
+    }
+
+    override fun onAttach(view: AddDeviceContract.View) {
+        this.view = view
+    }
+
+    override fun onDetach() {
+        view = null
         useCaseDevices.dispose()
     }
 
