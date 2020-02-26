@@ -3,7 +3,6 @@ package com.sudzusama.comparephones.domain.entity
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
-@Parcelize
 data class Device(
     val DeviceName: String,
     val Brand: String?,
@@ -53,4 +52,4 @@ data class Device(
     val video: String?,
     val weight: String?,
     val wlan: String?
-) : Parcelable
+)

@@ -1,6 +1,7 @@
 package com.sudzusama.comparephones.ui.selection
 
 import com.sudzusama.comparephones.domain.repository.DeviceRepository
+import com.sudzusama.comparephones.domain.usecase.UseCaseGetDeviceByName
 import com.sudzusama.comparephones.domain.usecase.UseCaseSaveComparsion
 import dagger.Module
 import dagger.Provides
@@ -16,4 +17,6 @@ class SelectionModule {
     @Provides
     fun provideSaveComparsionUseCase(repository: DeviceRepository) =
         UseCaseSaveComparsion(repository)
+
+
 }

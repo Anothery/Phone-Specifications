@@ -79,7 +79,7 @@ class AddDevicePresenter @Inject constructor(
     override fun onDeviceItemClicked(device: Device) {
         view.disableMatchesCount()
         matches.clear()
-        view.finishActivity(device)
+        view.finishActivity(device.DeviceName)
     }
 
     override fun onDestroy() {

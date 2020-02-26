@@ -2,9 +2,8 @@ package com.sudzusama.comparephones.ui.selection
 
 import android.content.Intent
 import com.sudzusama.comparephones.domain.entity.Comparsion
-import com.sudzusama.comparephones.domain.entity.Device
 import com.sudzusama.comparephones.domain.usecase.UseCaseSaveComparsion
-import com.sudzusama.comparephones.utils.DEVICE_EXTRA
+import com.sudzusama.comparephones.utils.DEVICE_NAME_EXTRA
 import io.reactivex.subscribers.DisposableSubscriber
 import javax.inject.Inject
 
@@ -12,24 +11,29 @@ class SelectionPresenter @Inject constructor(
     private val useCaseSaveComparsion: UseCaseSaveComparsion
 ) : SelectionContract.Presenter {
     private var view: SelectionContract.View? = null
-    private var firstDevice: Device? = null
-    private var secondDevice: Device? = null
+    private var firstDeviceName: String? = null
+    private var secondDeviceName: String? = null
 
     override fun onViewResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val device = data?.getParcelableExtra<Device>(DEVICE_EXTRA)
-        device?.let {
-            when (requestCode) {
-                1 -> {
-                    firstDevice = it
-                    loadFirstDevice()
+        data?.let { data ->
+            val deviceName = data.getStringExtra(DEVICE_NAME_EXTRA)
+
+            deviceName?.let {
+                when (requestCode) {
+                    1 -> {
+                        firstDeviceName = it
+                        loadFirstDevice()
+                    }
+                    2 -> {
+                        secondDeviceName = it
+                        loadSecondDevice()
+                    }
                 }
-                2 -> {
-                    secondDevice = it
-                    loadSecondDevice()
+
+                if (firstDeviceName != null && secondDeviceName != null) {
+                    view?.enableCompareButton()
                 }
             }
-
-            firstDevice?.let { secondDevice?.let { view?.enableCompareButton() } }
         }
     }
 
@@ -38,39 +42,29 @@ class SelectionPresenter @Inject constructor(
         loadSecondDevice()
     }
 
-    override fun onAttach(view: SelectionContract.View) {
-        this.view = view
-    }
-
-    override fun onDetach() {
-        this.view = null
-    }
 
     private fun loadFirstDevice() {
-        firstDevice?.let {
-            view?.disableFirstDeviceButton()
-            view?.enableFirstDeviceView()
-            view?.loadFirstDeviceInfo(it.DeviceName)
-        }
+        view?.disableFirstDeviceButton()
+        view?.enableFirstDeviceView()
+        view?.loadFirstDeviceInfo(firstDeviceName!!)
     }
 
+
     private fun loadSecondDevice() {
-        secondDevice?.let {
-            view?.disableSecondDeviceButton()
-            view?.enableSecondDeviceView()
-            view?.loadSecondDeviceInfo(it.DeviceName)
-        }
+        view?.disableSecondDeviceButton()
+        view?.enableSecondDeviceView()
+        view?.loadSecondDeviceInfo(secondDeviceName!!)
     }
 
     override fun onCloseFirstDeviceView() {
-        firstDevice = null
+        firstDeviceName = null
         view?.disableFirstDeviceView()
         view?.disableCompareButton()
         view?.enableFirstDeviceButton()
     }
 
     override fun onCloseSecondDeviceView() {
-        secondDevice = null
+        secondDeviceName = null
         view?.disableSecondDeviceView()
         view?.disableCompareButton()
         view?.enableSecondDeviceButton()
@@ -87,11 +81,11 @@ class SelectionPresenter @Inject constructor(
     }
 
     override fun onCompareButtonPressed() {
-        val fDevice = firstDevice
-        val sDevice = secondDevice
+        val fDevice = firstDeviceName
+        val sDevice = secondDeviceName
         if (fDevice != null && sDevice != null) {
             view?.disableButtons()
-            useCaseSaveComparsion.createComparsion(fDevice, sDevice)
+            useCaseSaveComparsion.setComparsion(fDevice, sDevice)
             useCaseSaveComparsion.subscribe(UseCaseSaveComparsionSubscriber())
 
         } else {
@@ -107,6 +101,13 @@ class SelectionPresenter @Inject constructor(
         //TODO
     }
 
+    override fun onAttach(view: SelectionContract.View) {
+        this.view = view
+    }
+
+    override fun onDetach() {
+        this.view = null
+    }
 
     override fun onResume() {
         view?.enableButtons()

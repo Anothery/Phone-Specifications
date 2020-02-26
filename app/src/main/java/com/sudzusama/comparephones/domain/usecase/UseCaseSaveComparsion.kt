@@ -1,7 +1,6 @@
 package com.sudzusama.comparephones.domain.usecase
 
 import com.sudzusama.comparephones.domain.entity.Comparsion
-import com.sudzusama.comparephones.domain.entity.Device
 import com.sudzusama.comparephones.domain.repository.DeviceRepository
 import io.reactivex.Flowable
 import javax.inject.Inject
@@ -9,13 +8,15 @@ import javax.inject.Inject
 
 class UseCaseSaveComparsion @Inject constructor(private val repository: DeviceRepository) :
     UseCase<Comparsion>() {
-    private lateinit var comparsion: Comparsion
+    private lateinit var firstDeviceName: String
+    private lateinit var secondDeviceName: String
 
-    fun createComparsion(firstDevice: Device, secondDevice: Device)  {
-        this.comparsion = Comparsion(0, firstDevice, secondDevice)
+    fun setComparsion(firstDeviceName: String, secondDeviceName: String) {
+        this.firstDeviceName = firstDeviceName
+        this.secondDeviceName = secondDeviceName
     }
 
     override fun createUseCase(): Flowable<Comparsion> {
-        return repository.addComparsion(comparsion).toFlowable()
+        return repository.addComparsion(firstDeviceName, secondDeviceName).toFlowable()
     }
 }

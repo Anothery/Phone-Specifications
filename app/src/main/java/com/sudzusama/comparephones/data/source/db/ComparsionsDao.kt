@@ -18,6 +18,4 @@ interface ComparsionsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertComparsion(comparsionEntity: ComparsionEntity): Completable
-
-
 }

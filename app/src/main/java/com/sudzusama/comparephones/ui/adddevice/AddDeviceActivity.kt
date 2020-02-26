@@ -15,6 +15,7 @@ import com.jakewharton.rxbinding3.widget.textChanges
 import com.sudzusama.comparephones.R
 import com.sudzusama.comparephones.domain.entity.Device
 import com.sudzusama.comparephones.utils.DEVICE_EXTRA
+import com.sudzusama.comparephones.utils.DEVICE_NAME_EXTRA
 import com.sudzusama.comparephones.utils.hideKeyboard
 import com.sudzusama.comparephones.utils.showKeyboard
 import dagger.android.AndroidInjection
@@ -104,10 +105,10 @@ class AddDeviceActivity : AppCompatActivity(), AddDeviceContract.View {
         adapter.notifyDataSetChanged()
     }
 
-    override fun finishActivity(result: Device) {
+    override fun finishActivity(deviceName: String) {
         this.hideKeyboard()
         val intent = Intent()
-        intent.putExtra(DEVICE_EXTRA, result)
+        intent.putExtra(DEVICE_NAME_EXTRA, deviceName)
         setResult(1, intent)
         finish()
     }

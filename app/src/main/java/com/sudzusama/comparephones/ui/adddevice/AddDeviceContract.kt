@@ -10,7 +10,7 @@ interface AddDeviceContract {
         fun disableMatchesCount()
         fun enableMatchesCount()
         fun setMatchesCount(matchesCount : Int)
-        fun finishActivity(result: Device)
+        fun finishActivity(deviceName: String)
     }
 
     interface Presenter {

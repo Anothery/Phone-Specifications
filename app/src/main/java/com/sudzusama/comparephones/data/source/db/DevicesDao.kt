@@ -11,13 +11,16 @@ interface DevicesDao {
 
     //TODO update it
     @Query("SELECT * FROM device LIMIT :amount")
-    fun getLatestDevices(amount: Int) : Single<List<DeviceEntity>>
+    fun getLatestDevices(amount: Int): Single<List<DeviceEntity>>
+
+    @Query("SELECT * FROM device WHERE DeviceName = :deviceName")
+    fun getDeviceByName(deviceName: String): Single<DeviceEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertDevice(deviceEntity: DeviceEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertDevices(devices : List<DeviceEntity>)
+    fun insertDevices(devices: List<DeviceEntity>)
 
     @Delete
     fun deleteDevice(deviceEntity: DeviceEntity)

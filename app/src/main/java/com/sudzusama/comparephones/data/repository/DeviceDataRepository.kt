@@ -1,5 +1,6 @@
 package com.sudzusama.comparephones.data.repository
 
+import com.sudzusama.comparephones.data.model.ComparsionEntity
 import com.sudzusama.comparephones.data.model.DeviceEntity
 import com.sudzusama.comparephones.data.model.mapper.ComparsionEntityToDomainMapper
 import com.sudzusama.comparephones.data.model.mapper.DeviceEntityToDomainMapper
@@ -31,14 +32,19 @@ class DeviceDataRepository @Inject constructor(
             .map { deviceEntityToDomainMapper.map(it) }
     }
 
+    override fun getDeviceByName(deviceName: String): Single<Device> {
+        return db.devicesDao().getDeviceByName(deviceName)
+            .map { deviceEntityToDomainMapper.map(it) }
+    }
+
     override fun getLatestComparsions(amount: Int): Single<List<Comparsion>> {
         return db.comparsionsDao().getLatestComparsions(amount)
             .map { comparsionEntityToDomainMapper.map(it) }
     }
 
-    override fun addComparsion(comparsion: Comparsion): Completable {
+    override fun addComparsion(firstDeviceName: String, secondDeviceName: String): Completable {
         return db.comparsionsDao()
-            .insertComparsion(comparsionEntityToDomainMapper.reverseMapToRawEntity(comparsion))
+            .insertComparsion(ComparsionEntity(0, firstDeviceName, secondDeviceName))
     }
 
     override fun getComparsionById(id: Int): Single<Comparsion> {

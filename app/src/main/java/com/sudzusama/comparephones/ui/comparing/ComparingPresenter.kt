@@ -12,7 +12,7 @@ class ComparingPresenter @Inject constructor(
     val view: ComparingContract.View,
     private val useCaseRecentComparsions: UseCaseRecentComparsions,
     private val useCaseGetComparsionById: UseCaseGetComparsionById
-) : ComparingContract.Presenter {
+    ) : ComparingContract.Presenter {
     private lateinit var specifications: ArrayList<Specification>
 
     override fun onCreate(specs: ArrayList<Specification>) {
@@ -47,8 +47,11 @@ class ComparingPresenter @Inject constructor(
     }
 
     private fun onLatestComparsionReceived(list: List<Comparsion>) {
-        val latestComparsion = list[0]
-        fillSpecificationsList(latestComparsion)
+        val latestComparsion = list.firstOrNull()
+
+        latestComparsion?.let {
+            fillSpecificationsList(it)
+        }
     }
 
     private fun fillSpecificationsList(comp: Comparsion) {
