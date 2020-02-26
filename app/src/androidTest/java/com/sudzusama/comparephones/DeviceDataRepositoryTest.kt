@@ -3,7 +3,6 @@ package com.sudzusama.comparephones
 import androidx.room.Room
 import androidx.test.InstrumentationRegistry
 import com.sudzusama.comparephones.data.model.mapper.ComparsionEntityToDomainMapper
-import com.sudzusama.comparephones.data.model.mapper.datatodomain.DeviceListMapper
 import com.sudzusama.comparephones.data.model.mapper.DeviceEntityToDomainMapper
 import com.sudzusama.comparephones.data.repository.DeviceDataRepository
 import com.sudzusama.comparephones.data.source.db.DevicesDatabase
@@ -29,18 +28,15 @@ class DeviceDataRepositoryTest {
     private lateinit var repository: DeviceDataRepository
 
     @Before
-    fun setUp(){
+    fun setUp() {
         initDatabase()
         initApi()
+        val deviceMapper = DeviceEntityToDomainMapper()
         repository = DeviceDataRepository(
             db,
             api,
-            DeviceListMapper(
-                DeviceEntityToDomainMapper()
-            ),
-            ComparsionEntityToDomainMapper(
-                DeviceEntityToDomainMapper()
-            )
+            deviceMapper,
+            ComparsionEntityToDomainMapper(deviceMapper)
         )
     }
 
@@ -69,7 +65,7 @@ class DeviceDataRepositoryTest {
         val results = ArrayList<com.sudzusama.comparephones.data.model.DeviceEntity>()
 
         repository.getDevices(DEVICE_NAME).subscribe()
-        db.devicesDao().getDevicesByTitle(DEVICE_NAME).subscribe({results.addAll(it)}, {})
+        db.devicesDao().getDevicesByTitle(DEVICE_NAME).subscribe({ results.addAll(it) }, {})
 
         Assert.assertTrue(results.size > 0)
     }

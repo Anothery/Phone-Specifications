@@ -11,22 +11,23 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+
 @Module
 class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(client : OkHttpClient): Retrofit =
-            Retrofit.Builder()
-                .baseUrl(FONO_API_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build()
+    fun provideRetrofit(client: OkHttpClient): Retrofit =
+        Retrofit.Builder()
+            .baseUrl(FONO_API_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient{
+    fun provideOkHttpClient(): OkHttpClient {
         val authInterceptor = Interceptor { chain ->
             val newUrl = chain.request().url()
                 .newBuilder()
@@ -41,11 +42,13 @@ class NetworkModule {
             chain.proceed(newRequest)
         }
 
-        return OkHttpClient.Builder().addInterceptor(authInterceptor).build()
+        return OkHttpClient.Builder()
+            .addInterceptor(authInterceptor)
+            .build()
     }
 
     @Provides
     @Singleton
-    fun provideCPApiService(retrofit : Retrofit) =
-            retrofit.create(CPApiService::class.java)
+    fun provideCPApiService(retrofit: Retrofit) =
+        retrofit.create(CPApiService::class.java)
 }

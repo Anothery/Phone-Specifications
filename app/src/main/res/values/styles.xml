@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppTheme" parent="BaseMaterialTheme"></style>
+    <style name="AppTheme" parent="BaseMaterialTheme" />
 
     <style name="BaseMaterialTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:fontFamily">@font/roboto_regular</item>
@@ -19,7 +19,7 @@
     </style>
 
     <style name="CrossButtonStyle" parent="@style/Widget.AppCompat.Button.Borderless">
-        <item name="android:background">@drawable/baseline_close_24</item>
+        <item name="android:background">@drawable/baseline_close_black_24</item>
     </style>
 
     <style name="Divider">
