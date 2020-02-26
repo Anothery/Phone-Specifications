@@ -28,6 +28,8 @@ class ComparingActivity : AppCompatActivity(), ComparingContract.View {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comparing)
+
+        presenter.onAttach(this)
         setupViews()
         setupRecyclerView()
         setupToolbar()
@@ -38,6 +40,11 @@ class ComparingActivity : AppCompatActivity(), ComparingContract.View {
         } else {
             presenter.onCreate(specifications)
         }
+    }
+
+    override fun onDestroy() {
+        presenter.onDetach()
+        super.onDestroy()
     }
 
     private fun setupViews() {
