@@ -11,7 +11,7 @@ class RecentPresenter @Inject constructor(
 ) :
     RecentContract.Presenter {
 
-    private var view: RecentContract.View? = null
+    override var view: RecentContract.View? = null
 
     private val RECENT_COMPARSIONS_AMOUNT = 3
 
@@ -55,12 +55,8 @@ class RecentPresenter @Inject constructor(
         getRecentComparsions()
     }
 
-    override fun onAttach(view: RecentContract.View) {
-        this.view = view
-    }
-
     override fun onDetach() {
-        view = null
         useCaseRecentComparsions.dispose()
+        super.onDetach()
     }
 }

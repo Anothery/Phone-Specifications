@@ -11,7 +11,7 @@ import javax.inject.Inject
 class SelectionPresenter @Inject constructor(
     private val useCaseSaveComparsion: UseCaseSaveComparsion
 ) : SelectionContract.Presenter {
-    private var view: SelectionContract.View? = null
+    override var view: SelectionContract.View? = null
 
     private var firstDeviceName: String? = null
     private var secondDeviceName: String? = null
@@ -46,13 +46,9 @@ class SelectionPresenter @Inject constructor(
         secondDeviceName?.let { loadSecondDevice(it) }
     }
 
-    override fun onAttach(view: SelectionContract.View) {
-        this.view = view
-    }
-
     override fun onDetach() {
-        view = null
         useCaseSaveComparsion.dispose()
+        super.onDetach()
     }
 
     private fun loadFirstDevice(fDevName: String) {

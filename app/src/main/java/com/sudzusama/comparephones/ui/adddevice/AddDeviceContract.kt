@@ -10,14 +10,13 @@ interface AddDeviceContract {
         fun updateRecyclerView()
         fun disableMatchesCount()
         fun enableMatchesCount()
-        fun setMatchesCount(matchesCount : Int)
+        fun setMatchesCount(matchesCount: Int)
         fun finishActivity(deviceName: String)
     }
 
-    interface Presenter : MVPPresenter<View>{
-        fun onCreate(matches : ArrayList<Device>)
+    interface Presenter : MVPPresenter<View> {
+        fun onCreate(matches: ArrayList<Device>)
         fun observeFromText(observable: Observable<CharSequence>)
-        fun onDeviceItemClicked(device : Device)
-        fun onDestroy()
+        fun onDeviceItemClicked(device: Device)
     }
 }

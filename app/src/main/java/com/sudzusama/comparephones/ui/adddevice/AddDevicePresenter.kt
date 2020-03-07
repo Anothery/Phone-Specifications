@@ -14,7 +14,7 @@ class AddDevicePresenter @Inject constructor(
     private val useCaseDevices: UseCaseDevices
 ) : AddDeviceContract.Presenter {
 
-    private var view: AddDeviceContract.View? = null
+    override var view: AddDeviceContract.View? = null
 
     private lateinit var matches: ArrayList<Device>
     private val disposable = CompositeDisposable()
@@ -81,17 +81,9 @@ class AddDevicePresenter @Inject constructor(
         view?.finishActivity(device.DeviceName)
     }
 
-    override fun onDestroy() {
-        useCaseDevices.dispose()
-    }
-
-    override fun onAttach(view: AddDeviceContract.View) {
-        this.view = view
-    }
-
     override fun onDetach() {
-        view = null
         useCaseDevices.dispose()
+        super.onDetach()
     }
 
 }

@@ -115,7 +115,7 @@ class AddDeviceActivity : AppCompatActivity(), AddDeviceContract.View {
     }
 
     override fun onDestroy() {
+        presenter.onDetach()
         super.onDestroy()
-        presenter.onDestroy()
     }
 }

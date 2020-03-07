@@ -1,6 +1,13 @@
 package com.sudzusama.comparephones.ui.base
 
 interface MVPPresenter<V> {
-    fun onAttach(view: V)
-    fun onDetach()
+    var view: V?
+
+    fun onAttach(view: V) {
+        this.view = view
+    }
+
+    fun onDetach() {
+        view = null
+    }
 }

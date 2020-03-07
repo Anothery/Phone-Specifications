@@ -13,7 +13,7 @@ class ComparingPresenter @Inject constructor(
     private val useCaseGetComparsionById: UseCaseGetComparsionById
 ) : ComparingContract.Presenter {
 
-    private var view: ComparingContract.View? = null
+    override var view: ComparingContract.View? = null
 
     private lateinit var specifications: ArrayList<Specification>
 
@@ -27,14 +27,11 @@ class ComparingPresenter @Inject constructor(
         getComparsionById(id)
     }
 
-    override fun onAttach(view: ComparingContract.View) {
-        this.view = view
-    }
 
     override fun onDetach() {
-        view = null
         useCaseRecentComparsions.dispose()
         useCaseGetComparsionById.dispose()
+        super.onDetach()
     }
 
     private fun getComparsionById(id: Int) {
