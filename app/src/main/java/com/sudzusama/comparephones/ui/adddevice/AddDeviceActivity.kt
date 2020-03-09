@@ -60,6 +60,7 @@ class AddDeviceActivity : AppCompatActivity(), AddDeviceContract.View {
             android.R.id.home -> {
                 this.hideKeyboard()
                 finish()
+                overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left)
             }
             R.id.toolbar_action_search -> {
                 item.isVisible = false
@@ -71,6 +72,11 @@ class AddDeviceActivity : AppCompatActivity(), AddDeviceContract.View {
 
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

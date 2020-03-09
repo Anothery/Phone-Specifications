@@ -2,7 +2,7 @@
 
 Приложение для сравнения характеристик мобильных устройств
 
-![](https://media.giphy.com/media/Qw2KIxvVEnMkmvP2mW/giphy.gif)
+![](comparephones.gif)
 
 Минимальная версия андроид, необходимая для установки: **4.4 KitKat**
 

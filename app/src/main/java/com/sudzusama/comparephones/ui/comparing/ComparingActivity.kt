@@ -73,9 +73,15 @@ class ComparingActivity : AppCompatActivity(), ComparingContract.View {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == android.R.id.home) {
             finish()
+            overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left)
         }
         return super.onOptionsItemSelected(item)
     }

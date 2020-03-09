@@ -1,6 +1,5 @@
 package com.sudzusama.comparephones.ui.selection
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,9 +12,9 @@ import androidx.fragment.app.Fragment
 import com.sudzusama.comparephones.R
 import com.sudzusama.comparephones.ui.adddevice.AddDeviceActivity
 import com.sudzusama.comparephones.ui.comparing.ComparingActivity
-import com.sudzusama.comparephones.utils.AnimationUtils
-import com.sudzusama.comparephones.utils.DURATION_1_SECOND
 import com.sudzusama.comparephones.utils.FragmentLifecycle
+import com.sudzusama.comparephones.utils.fadeIn
+import com.sudzusama.comparephones.utils.fadeOut
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -117,29 +116,29 @@ class SelectionFragment : Fragment(), SelectionContract.View, FragmentLifecycle 
     override fun startComparingActivity() {
         val intent = Intent(activity, ComparingActivity::class.java)
         startActivity(intent)
+        activity?.overridePendingTransition(R.anim.enter, R.anim.exit)
     }
 
     override fun startAddDeviceActivity(requestCode: Int) {
         val intent = Intent(activity, AddDeviceActivity::class.java)
         startActivityForResult(intent, requestCode)
+        activity?.overridePendingTransition(R.anim.enter, R.anim.exit)
     }
 
     override fun disableFirstDeviceButton() {
-        btnChooseFirstDevice.visibility = View.GONE
+        btnChooseFirstDevice.fadeOut()
     }
 
     override fun enableFirstDeviceButton() {
-        AnimationUtils.setAppearAnimation(btnChooseFirstDevice, DURATION_1_SECOND)
-        btnChooseFirstDevice.visibility = View.VISIBLE
+        btnChooseFirstDevice.fadeIn()
     }
 
     override fun disableSecondDeviceButton() {
-        btnChooseSecondDevice.visibility = View.GONE
+        btnChooseSecondDevice.fadeOut()
     }
 
     override fun enableSecondDeviceButton() {
-        AnimationUtils.setAppearAnimation(btnChooseSecondDevice, DURATION_1_SECOND)
-        btnChooseSecondDevice.visibility = View.VISIBLE
+        btnChooseSecondDevice.fadeIn()
     }
 
     override fun disableSecondDeviceView() {
@@ -159,11 +158,11 @@ class SelectionFragment : Fragment(), SelectionContract.View, FragmentLifecycle 
     }
 
     override fun enableCompareButton() {
-        btnCompare.visibility = View.VISIBLE
+        btnCompare.fadeIn()
     }
 
     override fun disableCompareButton() {
-        btnCompare.visibility = View.GONE
+        btnCompare.fadeOut()
     }
 
     companion object {

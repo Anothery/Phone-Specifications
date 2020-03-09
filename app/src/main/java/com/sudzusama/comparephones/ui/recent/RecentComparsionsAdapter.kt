@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sudzusama.comparephones.R
 import com.sudzusama.comparephones.domain.entity.Comparsion
-import com.sudzusama.comparephones.utils.AnimationUtils
 
 class RecentComparsionsAdapter(
     private val items: ArrayList<Comparsion>,
