@@ -174,7 +174,7 @@ class SelectionFragment : Fragment(), SelectionContract.View, FragmentLifecycle 
 
     override fun onPauseFragment() {}
 
-    override fun onResumeFragment() {}
-
-
+    override fun onResumeFragment() {
+        //TODO update
+    }
 }

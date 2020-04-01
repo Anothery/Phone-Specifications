@@ -3,13 +3,13 @@ package com.sudzusama.comparephones.ui.selection
 import android.content.Intent
 import android.util.Log
 import com.sudzusama.comparephones.domain.entity.Comparsion
-import com.sudzusama.comparephones.domain.usecase.UseCaseSaveComparsion
+import com.sudzusama.comparephones.domain.usecase.SaveComparsionUseCase
 import com.sudzusama.comparephones.utils.DEVICE_NAME_EXTRA
 import io.reactivex.subscribers.DisposableSubscriber
 import javax.inject.Inject
 
 class SelectionPresenter @Inject constructor(
-    private val useCaseSaveComparsion: UseCaseSaveComparsion
+    private val saveComparsionUseCase: SaveComparsionUseCase
 ) : SelectionContract.Presenter {
     override var view: SelectionContract.View? = null
 
@@ -47,7 +47,7 @@ class SelectionPresenter @Inject constructor(
     }
 
     override fun onDetach() {
-        useCaseSaveComparsion.dispose()
+        saveComparsionUseCase.dispose()
         super.onDetach()
     }
 
@@ -98,8 +98,8 @@ class SelectionPresenter @Inject constructor(
 
         if (fDevice != null && sDevice != null) {
             view?.disableButtons()
-            useCaseSaveComparsion.setComparsion(fDevice, sDevice)
-            useCaseSaveComparsion.subscribe(object : DisposableSubscriber<Comparsion>() {
+            saveComparsionUseCase.setComparsion(fDevice, sDevice)
+            saveComparsionUseCase.subscribe(object : DisposableSubscriber<Comparsion>() {
                 override fun onComplete() {
                     onComparsionSaveSuccess()
                 }

@@ -47,6 +47,10 @@ class DeviceDataRepository @Inject constructor(
             .insertComparsion(ComparsionEntity(0, firstDeviceName, secondDeviceName))
     }
 
+    override fun updateDeviceLastUsed(device: Device): Completable {
+        return db.devicesDao().updateDevice(deviceEntityToDomainMapper.reverseMap(device))
+    }
+
     override fun getComparsionById(id: Int): Single<Comparsion> {
         return db.comparsionsDao().getComparsionById(id)
             .map { comparsionEntityToDomainMapper.map(it) }

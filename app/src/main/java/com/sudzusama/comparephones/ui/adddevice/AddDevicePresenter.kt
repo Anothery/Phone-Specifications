@@ -2,16 +2,19 @@ package com.sudzusama.comparephones.ui.adddevice
 
 import android.util.Log
 import com.sudzusama.comparephones.domain.entity.Device
-import com.sudzusama.comparephones.domain.usecase.UseCaseDevices
+import com.sudzusama.comparephones.domain.usecase.GetDevicesByNameUseCase
+import com.sudzusama.comparephones.domain.usecase.UpdateDeviceUseCase
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.subscribers.DisposableSubscriber
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class AddDevicePresenter @Inject constructor(
-    private val useCaseDevices: UseCaseDevices
+    private val getDevicesByNameUseCase: GetDevicesByNameUseCase,
+    private val updateDeviceUseCase: UpdateDeviceUseCase
 ) : AddDeviceContract.Presenter {
 
     override var view: AddDeviceContract.View? = null
@@ -45,8 +48,8 @@ class AddDevicePresenter @Inject constructor(
         val text = char.toString()
         view?.enableMatchesCount()
         if (text.isNotEmpty()) {
-            useCaseDevices.searchDeviceByName(text)
-            useCaseDevices.subscribe(this::onDeviceListArrived, this::onDeviceListError)
+            getDevicesByNameUseCase.searchDeviceByName(text)
+            getDevicesByNameUseCase.subscribe(this::onDeviceListArrived, this::onDeviceListError)
         } else {
             matches.clear()
         }
@@ -76,13 +79,28 @@ class AddDevicePresenter @Inject constructor(
     }
 
     override fun onDeviceItemClicked(device: Device) {
+        updateDeviceLastUsed(device)
         view?.disableMatchesCount()
         matches.clear()
         view?.finishActivity(device.DeviceName)
     }
 
+    private fun updateDeviceLastUsed(device: Device) {
+        device.lastUsed = System.currentTimeMillis()
+        updateDeviceUseCase.setDevice(device)
+        updateDeviceUseCase.subscribe(object : DisposableSubscriber<Device>() {
+            override fun onComplete() {}
+            override fun onError(t: Throwable?) {
+                //TODO Log error
+            }
+
+            override fun onNext(t: Device?) {}
+        })
+
+    }
+
     override fun onDetach() {
-        useCaseDevices.dispose()
+        getDevicesByNameUseCase.dispose()
         super.onDetach()
     }
 

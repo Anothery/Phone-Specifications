@@ -6,18 +6,18 @@ import io.reactivex.Flowable
 import io.reactivex.Scheduler
 import javax.inject.Inject
 
-class UseCaseDevices @Inject constructor(
+class UpdateDeviceUseCase @Inject constructor(
     private val repository: DeviceRepository, subscribeScheduler: Scheduler,
     postExecutionScheduler: Scheduler
 ) :
-    UseCase<List<Device>>(subscribeScheduler, postExecutionScheduler) {
-    private lateinit var deviceName: String
+    UseCase<Device>(subscribeScheduler, postExecutionScheduler) {
+    private lateinit var device: Device
 
-    fun searchDeviceByName(name: String) {
-        deviceName = name
+    fun setDevice(device: Device) {
+        this.device = device
     }
 
-    override fun createUseCase(): Flowable<List<Device>> {
-        return repository.getDevices(deviceName).toFlowable()
+    override fun createUseCase(): Flowable<Device> {
+        return repository.updateDeviceLastUsed(device).toFlowable()
     }
 }

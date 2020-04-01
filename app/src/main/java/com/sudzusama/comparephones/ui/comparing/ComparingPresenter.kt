@@ -3,14 +3,14 @@ package com.sudzusama.comparephones.ui.comparing
 import android.util.Log
 import com.sudzusama.comparephones.domain.entity.Comparsion
 import com.sudzusama.comparephones.domain.entity.Specification
-import com.sudzusama.comparephones.domain.usecase.UseCaseGetComparsionById
-import com.sudzusama.comparephones.domain.usecase.UseCaseRecentComparsions
+import com.sudzusama.comparephones.domain.usecase.GetComparsionByIdUseCase
+import com.sudzusama.comparephones.domain.usecase.GetRecentComparsionsUseCase
 import com.sudzusama.comparephones.utils.SpecificationFormatterUtils
 import javax.inject.Inject
 
 class ComparingPresenter @Inject constructor(
-    private val useCaseRecentComparsions: UseCaseRecentComparsions,
-    private val useCaseGetComparsionById: UseCaseGetComparsionById
+    private val getRecentComparsionsUseCase: GetRecentComparsionsUseCase,
+    private val getComparsionByIdUseCase: GetComparsionByIdUseCase
 ) : ComparingContract.Presenter {
 
     override var view: ComparingContract.View? = null
@@ -29,14 +29,14 @@ class ComparingPresenter @Inject constructor(
 
 
     override fun onDetach() {
-        useCaseRecentComparsions.dispose()
-        useCaseGetComparsionById.dispose()
+        getRecentComparsionsUseCase.dispose()
+        getComparsionByIdUseCase.dispose()
         super.onDetach()
     }
 
     private fun getComparsionById(id: Int) {
-        useCaseGetComparsionById.setComparsionId(id)
-        useCaseGetComparsionById.subscribe(
+        getComparsionByIdUseCase.setComparsionId(id)
+        getComparsionByIdUseCase.subscribe(
             this::onComparsionReceived,
             this::onComparsionReceivingError
         )
@@ -44,8 +44,8 @@ class ComparingPresenter @Inject constructor(
     }
 
     private fun getLatestComparsion() {
-        useCaseRecentComparsions.setComparsionAmount(1)
-        useCaseRecentComparsions.subscribe(
+        getRecentComparsionsUseCase.setComparsionAmount(1)
+        getRecentComparsionsUseCase.subscribe(
             this::onLatestComparsionReceived,
             this::onComparsionReceivingError
         )

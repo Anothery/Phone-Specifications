@@ -3,11 +3,13 @@ package com.sudzusama.comparephones.ui.recent
 import android.util.Log
 import com.sudzusama.comparephones.domain.entity.Comparsion
 import com.sudzusama.comparephones.domain.entity.Device
-import com.sudzusama.comparephones.domain.usecase.UseCaseRecentComparsions
+import com.sudzusama.comparephones.domain.usecase.GetRecentComparsionsUseCase
+import com.sudzusama.comparephones.domain.usecase.GetRecentDevicesUseCase
 import javax.inject.Inject
 
 class RecentPresenter @Inject constructor(
-    private val useCaseRecentComparsions: UseCaseRecentComparsions
+    private val getRecentComparsionsUseCase: GetRecentComparsionsUseCase,
+    private val getRecentDevicesUseCase: GetRecentDevicesUseCase
 ) :
     RecentContract.Presenter {
 
@@ -22,13 +24,21 @@ class RecentPresenter @Inject constructor(
         recentComparsions = comparsions
         recentDevices = devices
         getRecentComparsions()
+        getRecentDevices()
     }
 
     private fun getRecentComparsions() {
-        useCaseRecentComparsions.setComparsionAmount(RECENT_COMPARSIONS_AMOUNT)
-        useCaseRecentComparsions.subscribe(
+        getRecentComparsionsUseCase.setComparsionAmount(RECENT_COMPARSIONS_AMOUNT)
+        getRecentComparsionsUseCase.subscribe(
             this::onRecentComparsionsListArrived,
             this::onRecentComparsionsListArrivingError
+        )
+    }
+
+    private fun getRecentDevices() {
+        getRecentDevicesUseCase.subscribe(
+            this::onRecentDevicesListArrived,
+            this::onRecentDevicesListArrivingError
         )
     }
 
@@ -43,20 +53,44 @@ class RecentPresenter @Inject constructor(
         }
     }
 
+
     private fun onRecentComparsionsListArrivingError(t: Throwable) {
         Log.e(this.javaClass.simpleName, t.message)
     }
 
+    private fun onRecentDevicesListArrived(list: List<Device>) {
+        recentDevices.clear()
+        recentDevices.addAll(list)
+        if (list.isNotEmpty()) {
+            view?.showRecentDevicesList()
+            view?.updateRecentDevicesList()
+        } else {
+            view?.hideRecentDevicesList()
+        }
+    }
+
+    private fun onRecentDevicesListArrivingError(t: Throwable) {
+        Log.e(this.javaClass.simpleName, t.message)
+    }
+
     override fun onRecentComparsionsItemClicked(comparsion: Comparsion) {
+        view?.disableRecentComparsionsList()
         view?.startComparingActivity(comparsion.comparsionId)
+        view?.enableRecentComparsionsList()
+    }
+
+    override fun onRecentDevicesItemClicked(device: Device) {
+        //TODO
     }
 
     override fun onViewResumed() {
         getRecentComparsions()
+        getRecentDevices()
     }
 
     override fun onDetach() {
-        useCaseRecentComparsions.dispose()
+        getRecentComparsionsUseCase.dispose()
+        getRecentDevicesUseCase.dispose()
         super.onDetach()
     }
 }

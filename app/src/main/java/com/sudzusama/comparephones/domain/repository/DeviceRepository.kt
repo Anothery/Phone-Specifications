@@ -12,4 +12,5 @@ interface DeviceRepository {
     fun getComparsionById(id: Int): Single<Comparsion>
     fun getDeviceByName(deviceName: String): Single<Device>
     fun addComparsion(firstDeviceName: String, secondDeviceName: String): Completable
+    fun updateDeviceLastUsed(device: Device): Completable
 }

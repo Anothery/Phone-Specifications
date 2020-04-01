@@ -32,6 +32,7 @@ class RecentFragment : Fragment(), RecentContract.View, FragmentLifecycle {
     private val recentDevices = ArrayList<Device>()
 
     private lateinit var recentComparsionsAdapter: RecentComparsionsAdapter
+    private lateinit var recentDevicesAdapter: RecentDevicesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +47,7 @@ class RecentFragment : Fragment(), RecentContract.View, FragmentLifecycle {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
         setupRvRecentComparsions()
+        setupRvRecentDevices()
         presenter.onAttach(this)
         presenter.onViewCreated(recentComparsions, recentDevices)
     }
@@ -65,14 +67,15 @@ class RecentFragment : Fragment(), RecentContract.View, FragmentLifecycle {
     private fun setupRvRecentComparsions() {
         rvRecentComparsions.layoutManager = LinearLayoutManager(activity)
         recentComparsionsAdapter =
-            RecentComparsionsAdapter(recentComparsions) {
-                presenter.onRecentComparsionsItemClicked(it)
-            }
+            RecentComparsionsAdapter(recentComparsions, presenter::onRecentComparsionsItemClicked)
         rvRecentComparsions.adapter = recentComparsionsAdapter
     }
 
     private fun setupRvRecentDevices() {
-        //todo
+        rvRecentDevices.layoutManager = LinearLayoutManager(activity)
+        recentDevicesAdapter =
+            RecentDevicesAdapter(recentDevices, presenter::onRecentDevicesItemClicked)
+        rvRecentDevices.adapter = recentDevicesAdapter
     }
 
     override fun startComparingActivity(id: Int) {
@@ -90,9 +93,31 @@ class RecentFragment : Fragment(), RecentContract.View, FragmentLifecycle {
         tvNoComparsions.visibility = View.GONE
     }
 
+    override fun showRecentDevicesList() {
+        rvRecentDevices.visibility = View.VISIBLE
+        tvNoDevices.visibility = View.GONE
+    }
+
+    override fun updateRecentDevicesList() {
+        recentDevicesAdapter.notifyDataSetChanged()
+    }
+
+    override fun hideRecentDevicesList() {
+        rvRecentDevices.visibility = View.GONE
+        tvNoDevices.visibility = View.VISIBLE
+    }
+
     override fun hideRecentComparsionsList() {
         rvRecentComparsions.visibility = View.GONE
         tvNoComparsions.visibility = View.VISIBLE
+    }
+
+    override fun disableRecentComparsionsList() {
+        rvRecentComparsions.isEnabled = false
+    }
+
+    override fun enableRecentComparsionsList() {
+        rvRecentComparsions.isEnabled = true
     }
 
     override fun onAttach(context: Context) {

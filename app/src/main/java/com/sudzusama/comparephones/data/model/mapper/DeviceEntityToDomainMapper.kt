@@ -54,7 +54,8 @@ class DeviceEntityToDomainMapper : Mapper<DeviceEntity, Device>() {
             source.usb,
             source.video,
             source.weight,
-            source.wlan
+            source.wlan,
+            source.lastUsed
         )
     }
 
@@ -107,7 +108,8 @@ class DeviceEntityToDomainMapper : Mapper<DeviceEntity, Device>() {
             source.usb,
             source.video,
             source.weight,
-            source.wlan
+            source.wlan,
+            source.lastUsed
         )
     }
 

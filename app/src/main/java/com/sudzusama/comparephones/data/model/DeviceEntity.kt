@@ -53,5 +53,6 @@ data class DeviceEntity(
     val usb: String?,
     val video: String?,
     val weight: String?,
-    val wlan: String?
+    val wlan: String?,
+    var lastUsed: Long?
 )

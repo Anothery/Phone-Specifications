@@ -6,7 +6,7 @@ import io.reactivex.Flowable
 import io.reactivex.Scheduler
 import javax.inject.Inject
 
-class UseCaseGetComparsionById @Inject constructor(
+class GetComparsionByIdUseCase @Inject constructor(
     private val repository: DeviceRepository,
     subscribeScheduler: Scheduler,
     postExecutionScheduler: Scheduler

@@ -7,7 +7,7 @@ import io.reactivex.Scheduler
 import javax.inject.Inject
 
 
-class UseCaseRecentComparsions @Inject constructor(
+class GetRecentComparsionsUseCase @Inject constructor(
     private val repository: DeviceRepository,
     subscribeScheduler: Scheduler,
     postExecutionScheduler: Scheduler

@@ -7,7 +7,7 @@ import io.reactivex.Scheduler
 import javax.inject.Inject
 
 
-class UseCaseGetDeviceByName @Inject constructor(
+class GetDeviceByNameUseCase @Inject constructor(
     private val repository: DeviceRepository, subscribeScheduler: Scheduler,
     postExecutionScheduler: Scheduler
 ) :

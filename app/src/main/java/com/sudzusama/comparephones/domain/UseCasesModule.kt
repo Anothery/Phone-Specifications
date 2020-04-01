@@ -1,10 +1,7 @@
 package com.sudzusama.comparephones.domain
 
 import com.sudzusama.comparephones.domain.repository.DeviceRepository
-import com.sudzusama.comparephones.domain.usecase.UseCaseDevices
-import com.sudzusama.comparephones.domain.usecase.UseCaseGetComparsionById
-import com.sudzusama.comparephones.domain.usecase.UseCaseRecentComparsions
-import com.sudzusama.comparephones.domain.usecase.UseCaseSaveComparsion
+import com.sudzusama.comparephones.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
@@ -31,8 +28,8 @@ class UseCasesModule {
         repository: DeviceRepository,
         @Named("IO") subsScheduler: Scheduler,
         @Named("Main") postExecScheduler: Scheduler
-    ): UseCaseSaveComparsion =
-        UseCaseSaveComparsion(
+    ): SaveComparsionUseCase =
+        SaveComparsionUseCase(
             repository,
             subsScheduler,
             postExecScheduler
@@ -44,8 +41,8 @@ class UseCasesModule {
         repository: DeviceRepository,
         @Named("IO") subsScheduler: Scheduler,
         @Named("Main") postExecScheduler: Scheduler
-    ): UseCaseGetComparsionById =
-        UseCaseGetComparsionById(
+    ): GetComparsionByIdUseCase =
+        GetComparsionByIdUseCase(
             repository,
             subsScheduler,
             postExecScheduler
@@ -58,7 +55,7 @@ class UseCasesModule {
         repository: DeviceRepository,
         @Named("IO") subsScheduler: Scheduler,
         @Named("Main") postExecScheduler: Scheduler
-    ) = UseCaseRecentComparsions(
+    ) = GetRecentComparsionsUseCase(
         repository,
         subsScheduler,
         postExecScheduler
@@ -70,7 +67,31 @@ class UseCasesModule {
         repository: DeviceRepository,
         @Named("IO") subsScheduler: Scheduler,
         @Named("Main") postExecScheduler: Scheduler
-    ) = UseCaseDevices(
+    ) = GetDevicesByNameUseCase(
+        repository,
+        subsScheduler,
+        postExecScheduler
+    )
+
+    @Singleton
+    @Provides
+    fun provideUpdateDeviceeUseCase(
+        repository: DeviceRepository,
+        @Named("IO") subsScheduler: Scheduler,
+        @Named("Main") postExecScheduler: Scheduler
+    ) = UpdateDeviceUseCase(
+        repository,
+        subsScheduler,
+        postExecScheduler
+    )
+
+    @Singleton
+    @Provides
+    fun provideGetLastUsedDeviceeUseCase(
+        repository: DeviceRepository,
+        @Named("IO") subsScheduler: Scheduler,
+        @Named("Main") postExecScheduler: Scheduler
+    ) = GetRecentDevicesUseCase(
         repository,
         subsScheduler,
         postExecScheduler

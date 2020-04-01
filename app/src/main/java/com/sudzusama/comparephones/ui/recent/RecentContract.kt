@@ -10,11 +10,17 @@ interface RecentContract {
         fun showRecentComparsionsList()
         fun hideRecentComparsionsList()
         fun startComparingActivity(id: Int)
+        fun enableRecentComparsionsList()
+        fun disableRecentComparsionsList()
+        fun showRecentDevicesList()
+        fun hideRecentDevicesList()
+        fun updateRecentDevicesList()
     }
 
     interface Presenter : MVPPresenter<View> {
         fun onRecentComparsionsItemClicked(comparsion: Comparsion)
         fun onViewCreated(comparsions: ArrayList<Comparsion>, devices: ArrayList<Device>)
         fun onViewResumed()
+        fun onRecentDevicesItemClicked(device: Device)
     }
 }
